@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.WelcomeController">
+    <Text layoutX="273.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To IDK">
+        <font>
+          <Font size="30.0" />
+        </font>
+    </Text>
+    <ImageView fx:id="Image" fitHeight="294.0" fitWidth="337.0" layoutX="220.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@Images/Welcome/Burger.jpg" />
+    </ImageView>
+    <Button fx:id="btContinue" layoutX="351.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#Next" text="Continue" />
+</Pane>
