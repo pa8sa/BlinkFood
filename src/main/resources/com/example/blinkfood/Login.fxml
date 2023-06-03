@@ -10,31 +10,31 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.LoginController">
    <children>
-      <TextField fx:id="txtUR" layoutX="414.0" layoutY="168.0" />
+      <TextField fx:id="TextUsername" layoutX="414.0" layoutY="168.0" />
       <Text layoutX="235.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" wrappingWidth="94.13671875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="239.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" wrappingWidth="86.93670654296875">
+      <Text layoutX="235.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" wrappingWidth="86.93670654296875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <PasswordField fx:id="txtFieldPW" layoutX="414.0" layoutY="224.0" />
-      <TextField fx:id="txtPW" layoutX="414.0" layoutY="224.0" visible="false" />
-      <Button fx:id="btOK" layoutX="364.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#Next" prefHeight="25.0" prefWidth="39.0" text="OK" />
+      <PasswordField fx:id="TextPasswordField" layoutX="414.0" layoutY="224.0" />
+      <TextField fx:id="TextPassword" layoutX="414.0" layoutY="224.0" visible="false" />
+      <Button fx:id="ButtonOK" layoutX="364.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#NextScene" prefHeight="25.0" prefWidth="39.0" text="OK" />
       <Text layoutX="354.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <RadioButton fx:id="rbtSP" layoutX="585.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#ShowPass" text="Show Password" />
+      <RadioButton fx:id="RadioButtonShowPass" layoutX="585.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#ShowPass" text="Show Password" />
       <Text layoutX="545.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press To SignUp :">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Button fx:id="btSignUp" layoutX="663.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#SignUpScene" text="SignUp" />
+      <Button fx:id="ButtonSignUp" layoutX="663.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#SignUpScene" text="SignUp" />
    </children>
 </Pane>

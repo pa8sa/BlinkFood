@@ -13,8 +13,8 @@
           <Font size="30.0" />
         </font>
     </Text>
-    <ImageView fx:id="Image" fitHeight="294.0" fitWidth="337.0" layoutX="220.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView  fitHeight="294.0" fitWidth="337.0" layoutX="220.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@Images/Welcome/Burger.jpg" />
     </ImageView>
-    <Button fx:id="btContinue" layoutX="351.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#Next" text="Continue" />
+    <Button fx:id="ButtonContinue" layoutX="351.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#NextScene" text="Continue" />
 </Pane>
