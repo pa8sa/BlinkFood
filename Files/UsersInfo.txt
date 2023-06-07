@@ -1,3 +1,0 @@
-parsa,123,123,123,123,
-kambiz,asda,asd,33,23,
-salman,safa,afsf,gfg,1,

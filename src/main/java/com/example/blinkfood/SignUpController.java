@@ -68,11 +68,7 @@ public class SignUpController {
         }
         if (sw == 1) {
             BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt", true));
-            writer.write(TextUsername.getText() + ",");
-            writer.write(TextPasswordField.getText() + ",");
-            writer.write(TextPhoneNumber.getText() + ",");
-            writer.write(TextAddress.getText() + ",");
-            writer.write(TextEmail.getText() + "," + "\n");
+            Server.ClientHandler.writeToFile("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt",TextUsername.getText() + "," + TextPasswordField.getText() + "," + TextPhoneNumber.getText() + "," + TextAddress.getText() + "," + TextEmail.getText() + "\n");
             writer.flush();
             writer.close();
             System.out.println(TextAddress.getText());
