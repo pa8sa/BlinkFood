@@ -69,5 +69,30 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Text fx:id="EmailError" fill="#ff0101" layoutX="331.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Is Not Correct" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="PasswordError" fill="#ff0101" layoutX="262.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password Must Be 8 Character Or More" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="PhoneNumberError" fill="#ff0101" layoutX="313.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Is Not Correct" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="PhoneNumberTakenError" fill="#ff0101" layoutX="313.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="EmailTakenError" fill="#ff0101" layoutX="340.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
     </children>
 </Pane>

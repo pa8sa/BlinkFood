@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,11 +35,26 @@ public class LoginController {
     private TextField TextUsername;
 
     @FXML
-    void NextScene(MouseEvent event) throws IOException {
-//        Stage stage = (Stage) ButtonOK.getScene().getWindow();
-//        Parent root = FXMLLoader.load(getClass().getResource(""));
-//        stage.setTitle("");
-//        stage.setScene(new Scene(root));
+    private Text Error;
+
+    @FXML
+    private Text Done;
+
+    @FXML
+    void NextScene(MouseEvent event) throws IOException, InterruptedException {
+        Error.setVisible(false);
+        Done.setVisible(false);
+        if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
+            Done.setVisible(true);
+            wait(3000);
+            Stage stage = (Stage) ButtonOK.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            stage.setTitle("Menu");
+            stage.setScene(new Scene(root));
+        }
+        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == -1) {
+            Error.setVisible(true);
+        }
     }
 
     @FXML

@@ -1,7 +1,6 @@
 package com.example.blinkfood;
 
 import java.io.*;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,41 +52,64 @@ public class SignUpController {
     private Text EmptyError;
 
     @FXML
-    void NextScene(MouseEvent event) throws IOException, InterruptedException {
-        int sw = 1;
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
-        String line;
-        for (; (line = reader.readLine()) != null;) {
-            if (TextUsername.getText().equals(line.split(",")[0])) {
-                sw = 0;
-                break;
-            }
-        }
-        if (TextUsername.getText().isEmpty() || TextEmail.getText().isEmpty() || TextAddress.getText().isEmpty() || TextPasswordField.getText().isEmpty() || TextPhoneNumber.getText().isEmpty()) {
-            sw = -1;
-        }
-        if (sw == 1) {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt", true));
-            Server.ClientHandler.writeToFile("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt",TextUsername.getText() + "," + TextPasswordField.getText() + "," + TextPhoneNumber.getText() + "," + TextAddress.getText() + "," + TextEmail.getText() + "\n");
-            writer.flush();
-            writer.close();
-            System.out.println(TextAddress.getText());
-            UsernameError.setVisible(false);
-            UsernameDone.setVisible(true);
+    private Text EmailError;
+
+    @FXML
+    private Text PhoneNumberError;
+
+    @FXML
+    private Text PasswordError;
+
+    @FXML
+    private Text EmailTakenError;
+
+    @FXML
+    private Text PhoneNumberTakenError;
+
+    @FXML
+    void NextScene(MouseEvent event) throws InterruptedException, IOException {
+        EmptyError.setVisible(false);
+        UsernameError.setVisible(false);
+        EmailError.setVisible(false);
+        PhoneNumberError.setVisible(false);
+        PasswordError.setVisible(false);
+        UsernameDone.setVisible(false);
+        EmailTakenError.setVisible(false);
+        PhoneNumberTakenError.setVisible(false);
+        String Content = TextUsername.getText() + "," + TextPasswordField.getText() + "," + TextPhoneNumber.getText() + "," + TextAddress.getText() + "," + TextEmail.getText();
+        if (Server.ClientHandler.writeToFile("UserSignUp", Content) == 1) {
             EmptyError.setVisible(false);
+            UsernameError.setVisible(false);
+            EmailError.setVisible(false);
+            PhoneNumberError.setVisible(false);
+            PasswordError.setVisible(false);
+            UsernameDone.setVisible(true);
+            wait(3000);
+            Stage stage = (Stage) ButtonOK.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            stage.setTitle("Menu");
+            stage.setScene(new Scene(root));
         }
-        else if (sw == 0) {
-            UsernameError.setVisible(true);
-        }
-        else if (sw == -1) {
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -1) {
             EmptyError.setVisible(true);
         }
-        if (sw == 1) {
-            wait(3000);
-//            Stage stage = (Stage) ButtonOK.getScene().getWindow();
-//            Parent root = FXMLLoader.load(getClass().getResource(""));
-//            stage.setTitle("");
-//            stage.setScene(new Scene(root));
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -2) {
+            UsernameError.setVisible(true);
+        }
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -3) {
+            EmailError.setVisible(true);
+        }
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -4) {
+            PhoneNumberError.setVisible(true);
+        }
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -5) {
+            PasswordError.setVisible(true);
+        }
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -6) {
+            PhoneNumberTakenError.setVisible(true);
+        }
+        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -7) {
+            EmailTakenError.setVisible(true);
         }
     }
 
