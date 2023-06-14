@@ -19,9 +19,6 @@ public class Main extends Application {
         stage.setScene(new Scene(root));
         stage.show();
 
-
-
-
         Socket socket = new Socket("localhost", 8080);
         System.out.println("Connected to server");
 

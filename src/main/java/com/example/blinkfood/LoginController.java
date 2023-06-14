@@ -41,15 +41,14 @@ public class LoginController {
     private Text Done;
 
     @FXML
-    void NextScene(MouseEvent event) throws IOException, InterruptedException {
+    void NextScene(MouseEvent event) throws IOException {
         Error.setVisible(false);
         Done.setVisible(false);
         if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
             Done.setVisible(true);
-            wait(3000);
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            stage.setTitle("Menu");
+            stage.setTitle("Restaurants");
             stage.setScene(new Scene(root));
         }
         else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == -1) {

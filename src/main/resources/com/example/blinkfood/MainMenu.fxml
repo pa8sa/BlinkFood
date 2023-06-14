@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.blinkfood.MainMenuController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.MainMenuController">
+    <children>
+        <TableView fx:id="TableView" layoutX="14.0" layoutY="66.0" onMousePressed="#handleTableViewDoubleClick" prefHeight="444.0" prefWidth="540.0">
+            <columns>
+                <TableColumn fx:id="NameColumn" prefWidth="102.40002250671387" text="Name" />
+                <TableColumn fx:id="AddressColumn" prefWidth="215.2000274658203" text="Address" />
+                <TableColumn fx:id="WorkingTimeColumn" prefWidth="118.39996337890625" text="Working Time" />
+                <TableColumn fx:id="TypeColumn" minWidth="0.0" prefWidth="101.60003662109375" text="Type" />
+            </columns>
+        </TableView>
+        <Text layoutX="329.0" layoutY="37.0" onMousePressed="#handleTableViewDoubleClick" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurants">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Text>
+    </children>
+</Pane>

@@ -3,10 +3,13 @@ package com.example.blinkfood;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Server {
-
+    public static ArrayList<Restaurant> Restaurants = new ArrayList<>();
+    public static int j = 0;
+    public static int AllCount = 0;
     public static void main(String[] args) {
         final int PORT = 8080;
 
@@ -129,6 +132,34 @@ public class Server {
                     e.printStackTrace();
                 }
             }
+            else if (Type.equals("Restaurants")) {
+                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"))) {
+                    String line;
+                    int currentLineNumber = -1;
+                    while ((line = reader.readLine()) != null) {
+                        currentLineNumber++;
+                        if (currentLineNumber == lineNumber) {
+                            return line;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (Type.equals("Foods")) {
+                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"))) {
+                    String line;
+                    int currentLineNumber = -1;
+                    while ((line = reader.readLine()) != null) {
+                        currentLineNumber++;
+                        if (currentLineNumber == lineNumber) {
+                            return line;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
 
@@ -137,8 +168,6 @@ public class Server {
                 try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"))) {
                     String line = reader.readLine();
                     while (line != null) {
-                        System.out.println(line);
-                        System.out.println(data);
                         if (line.split(",")[0].equals(data.split(",")[0]) && line.split(",")[1].equals(data.split(",")[1])) {
                             return 1;
                         }
@@ -150,6 +179,19 @@ public class Server {
                 }
             }
             return 0;
+        }
+
+        public static ArrayList<Restaurant> getRestaurants () {
+            String line;
+            for (int i = 0; (line = readFile("Restaurants", i)) != null; i++) {
+                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4])));
+                String line2;
+                AllCount += Restaurants.get(i).getFoodsCount();
+                for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
+                    Restaurants.get(i).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                }
+            }
+            return Restaurants;
         }
     }
 }

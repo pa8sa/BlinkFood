@@ -9,7 +9,7 @@ public class User {
     private String PassWord;
     private String Address;
     private double Balance;
-    public User (String UserName, String PhoneNumber, String Email, String PassWord, String Address) {
+    public User (String UserName, String PassWord, String PhoneNumber, String Address, String Email) {
         this.UserName = UserName;
         this.PhoneNumber = PhoneNumber;
         this.Email = Email;
