@@ -35,6 +35,9 @@ public class MainMenuController implements Initializable {
     @FXML
     private TableColumn<Restaurant, String> WorkingTimeColumn;
 
+    @FXML
+    private TableColumn<Restaurant, Integer> ChairDeliveryColumn;
+
     static ObservableList<Restaurant> list;
 
     @Override
@@ -47,6 +50,7 @@ public class MainMenuController implements Initializable {
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        ChairDeliveryColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, Integer>("Chair_Delivery_Count"));
         TableView.setItems(list);
     }
 

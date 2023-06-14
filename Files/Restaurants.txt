@@ -1,2 +1,2 @@
-AbbasKabab,mashad,10 ta 23,BaMiz,3
-BurgerKing,LA,sob,BiroonBar,2
+AbbasKabab,mashad,10 ta 23,BaMiz,3,25
+BurgerKing,LA,sob,BiroonBar,2,10

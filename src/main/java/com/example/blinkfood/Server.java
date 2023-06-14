@@ -196,7 +196,7 @@ public class Server {
         public static ArrayList<Restaurant> getRestaurants () {
             String line;
             for (int i = 0; (line = readFile("Restaurants", i)) != null; i++) {
-                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4])));
+                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5])));
                 String line2;
                 AllCount += Restaurants.get(i).getFoodsCount();
                 for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
