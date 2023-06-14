@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -70,17 +71,11 @@ public class RestaurantController implements Initializable {
 
     @FXML
     void NextScene(MouseEvent event) throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pay.fxml"));
-//        Parent root = loader.load();
-//        // Get the controller instance for the next scene
-//        PayController payController = loader.getController();
-//        // Pass any necessary data to the next scene's controller
-//        // payController.setData(...);
-//
-//        Scene scene = new Scene(root);
-//        Stage stage = (Stage) DoneButton.getScene().getWindow();
-//        stage.setScene(scene);
-//        stage.show();
+        PaymentController.setRestaurant(selectedRestaurant);
+        Stage stage = (Stage) DoneButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("Payment.fxml"));
+        stage.setTitle("Payment");
+        stage.setScene(new Scene(root));
     }
 
     @FXML
@@ -120,4 +115,3 @@ public class RestaurantController implements Initializable {
         ChoiceBox.setOnAction(this::onChoiceBoxSelectionChanged);
     }
 }
-

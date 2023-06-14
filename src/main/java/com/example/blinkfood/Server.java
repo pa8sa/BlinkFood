@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Server {
+    public static User user = new User();
     public static ArrayList<Restaurant> Restaurants = new ArrayList<>();
     public static int j = 0;
     public static int AllCount = 0;
@@ -105,6 +106,12 @@ public class Server {
                         line = Server.ClientHandler.readFile("UserSignUp", i);
                     }
 
+                    user.setUserName(data.split(",")[0]);
+                    user.setPassWord(data.split(",")[1]);
+                    user.setPhoneNumber(data.split(",")[2]);
+                    user.setAddress(data.split(",")[3]);
+                    user.setEmail(data.split(",")[4]);
+
                     writer.write(data + "\n");
                     writer.flush();
                     writer.close();
@@ -169,6 +176,11 @@ public class Server {
                     String line = reader.readLine();
                     while (line != null) {
                         if (line.split(",")[0].equals(data.split(",")[0]) && line.split(",")[1].equals(data.split(",")[1])) {
+                            user.setUserName(line.split(",")[0]);
+                            user.setPassWord(line.split(",")[1]);
+                            user.setPhoneNumber(line.split(",")[2]);
+                            user.setAddress(line.split(",")[3]);
+                            user.setEmail(line.split(",")[4]);
                             return 1;
                         }
                         line = reader.readLine();

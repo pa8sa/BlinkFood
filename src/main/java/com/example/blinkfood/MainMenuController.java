@@ -7,19 +7,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.skin.SliderSkin;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
+
+    private static int sw = 0;
 
     @FXML
     private TableView<Restaurant> TableView;
@@ -36,11 +35,14 @@ public class MainMenuController implements Initializable {
     @FXML
     private TableColumn<Restaurant, String> WorkingTimeColumn;
 
-    ObservableList<Restaurant> list;
+    static ObservableList<Restaurant> list;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Restaurant> list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
+        if (sw == 0) {
+            list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
+            sw++;
+        }
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));

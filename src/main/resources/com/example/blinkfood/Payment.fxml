@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.blinkfood.Payment"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.PaymentController">
+   <children>
+      <ListView fx:id="ListView" layoutX="14.0" layoutY="14.0" prefHeight="442.0" prefWidth="290.0" />
+      <Button layoutX="129.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Remove" text="Remove" />
+      <Text layoutX="320.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit :" wrappingWidth="59.200000000000045">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="320.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cost :" wrappingWidth="90.4000122070313">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="560.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press To Charge Your Credit Card" />
+      <Button fx:id="ChargeButton" layoutX="622.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Charge" text="Charge" />
+      <Text layoutX="320.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" wrappingWidth="90.4000122070313">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="320.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :" wrappingWidth="76.79997558593755">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="321.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PhoneNumber :" wrappingWidth="124.79997558593755">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="320.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="59.200000000000045">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="321.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant :" wrappingWidth="96.79997558593755">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="RestaurantText" layoutX="546.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="EmailText" layoutX="546.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="PhoneNumberText" layoutX="546.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="AddressText" layoutX="546.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="UsernameText" layoutX="546.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="CostText" layoutX="546.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="CreditText" layoutX="546.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="203.99992675781255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="BackButton" layoutX="334.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="26.0" prefWidth="48.0" text="Back" />
+      <Button fx:id="DoneButton" layoutX="386.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Done" prefHeight="26.0" prefWidth="48.0" text="Done" />
+   </children>
 </AnchorPane>

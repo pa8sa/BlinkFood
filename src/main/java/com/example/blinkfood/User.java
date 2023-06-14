@@ -8,7 +8,11 @@ public class User {
     private String Email;
     private String PassWord;
     private String Address;
-    private double Balance;
+    private double Balance = 0;
+
+    public User () {
+
+    }
     public User (String UserName, String PassWord, String PhoneNumber, String Address, String Email) {
         this.UserName = UserName;
         this.PhoneNumber = PhoneNumber;
@@ -34,5 +38,29 @@ public class User {
     }
     public double getBalance() {
         return Balance;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public void setBalance(double balance) {
+        Balance = balance;
+    }
+
+    public void setPassWord(String passWord) {
+        PassWord = passWord;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 }
