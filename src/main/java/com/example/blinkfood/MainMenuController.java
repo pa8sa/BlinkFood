@@ -59,25 +59,15 @@ public class MainMenuController implements Initializable {
         if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
             Restaurant selectedRestaurant = TableView.getSelectionModel().getSelectedItem();
             if (selectedRestaurant != null) {
-                // Load the Restaurant.fxml scene
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Restaurant.fxml"));
-                Parent restaurantRoot = loader.load();
+                Parent root = loader.load();
                 RestaurantController restaurantController = loader.getController();
-
-                // Pass the selectedRestaurant to the RestaurantController
                 restaurantController.setRestaurant(selectedRestaurant);
-
-                // Create a new stage for the Restaurant scene
-                Stage restaurantStage = new Stage();
-                Scene restaurantScene = new Scene(restaurantRoot);
-                restaurantStage.setTitle(selectedRestaurant.getName());
-                restaurantStage.setScene(restaurantScene);
-                restaurantStage.show();
-
-                // Close the current stage (if needed)
-                Stage currentStage = (Stage) TableView.getScene().getWindow();
-                currentStage.close();
+                Stage stage = (Stage) TableView.getScene().getWindow();
+                stage.setTitle(selectedRestaurant.getName());
+                stage.setScene(new Scene(root));
             }
         }
     }
+
 }

@@ -58,7 +58,7 @@ public class Food {
         Count++;
     }
 
-    public void removeCount() {
+    public void reduceCount() {
         Count--;
     }
 }

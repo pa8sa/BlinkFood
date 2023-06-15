@@ -1,25 +1,23 @@
 package com.example.blinkfood;
 
-import javafx.util.converter.ShortStringConverter;
-
 public class User {
     private String UserName;
     private String PhoneNumber;
     private String Email;
     private String PassWord;
     private String Address;
-    private double Balance = 0;
+    private double Balance;
 
     public User () {
 
     }
-    public User (String UserName, String PassWord, String PhoneNumber, String Address, String Email) {
+    public User (String UserName, String PassWord, String PhoneNumber, String Address, String Email, double Balance) {
         this.UserName = UserName;
         this.PhoneNumber = PhoneNumber;
         this.Email = Email;
         this.PassWord = PassWord;
         this.Address = Address;
-        this.Balance = 0;
+        this.Balance = Balance;
     }
     public String getUserName() {
         return UserName;
@@ -62,5 +60,15 @@ public class User {
 
     public void setUserName(String userName) {
         UserName = userName;
+    }
+
+    public void AddToBalance (double Amount) {
+        Balance += Amount;
+    }
+
+    public void ReduceOfBalance (double Amount) {
+        if (Balance - Amount >= 0) {
+            Balance -= Amount;
+        }
     }
 }

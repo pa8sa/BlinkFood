@@ -10,14 +10,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PaymentController implements Initializable {
-    private int TotalCost = 0;
-    private static Restaurant selectedRestaurant;
+    private int TotalCost;
+    private Restaurant selectedRestaurant;
 
     @FXML
     private Button BackButton;
@@ -56,7 +55,7 @@ public class PaymentController implements Initializable {
     void Remove(MouseEvent event) {
         String selectedItem = ListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
+            for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
                 String foodItem = selectedRestaurant.getFoods().get(i).getName() + "   x" + selectedRestaurant.getFoods().get(i).getCount();
                 if (selectedItem.equals(foodItem)) {
                     Food food = selectedRestaurant.getFoods().get(i);
@@ -64,7 +63,7 @@ public class PaymentController implements Initializable {
                         selectedRestaurant.getFoods().remove(i);
                         ListView.getItems().remove(selectedItem);
                     } else {
-                        food.removeCount();
+                        food.reduceCount();
                         ListView.getItems().set(ListView.getSelectionModel().getSelectedIndex(), food.getName() + "   x" + food.getCount());
                     }
                     TotalCost -= food.getPrice();
@@ -113,9 +112,10 @@ public class PaymentController implements Initializable {
     }
 
 
-    public static void setRestaurant(Restaurant restaurant) {
+    public void setRestaurant(Restaurant restaurant) {
         selectedRestaurant = restaurant;
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

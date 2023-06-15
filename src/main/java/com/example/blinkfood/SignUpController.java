@@ -84,7 +84,6 @@ public class SignUpController {
             PhoneNumberError.setVisible(false);
             PasswordError.setVisible(false);
             UsernameDone.setVisible(true);
-            wait(3000);
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             stage.setTitle("Menu");

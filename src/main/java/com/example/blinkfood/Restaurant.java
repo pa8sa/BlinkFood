@@ -7,18 +7,17 @@ public class Restaurant {
     private String Address;
     private String WorkTime;
     private ArrayList<Food> Foods = new ArrayList<>();
-
     public enum Res_Type {BiroonBar, BaMiz};
     private Res_Type Type;
-    private int FoodsCount;
     private int Chair_Delivery_Count;
+    private int FoodsCount;
 
     public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk) {
         Name = name;
         Address = address;
         WorkTime = workTime;
-        FoodsCount = foodsCount;
         Chair_Delivery_Count = Miz_Peyk;
+        FoodsCount = foodsCount;
         if (type.equals("BiroonBar")) {
             Type = Res_Type.BiroonBar;
         }
@@ -45,12 +44,12 @@ public class Restaurant {
         return WorkTime;
     }
 
-    public ArrayList<Food> getFoods() {
-        return Foods;
-    }
-
     public int getFoodsCount() {
         return FoodsCount;
+    }
+
+    public ArrayList<Food> getFoods() {
+        return Foods;
     }
 
     public void setAddress(String address) {
@@ -73,12 +72,12 @@ public class Restaurant {
         WorkTime = workTime;
     }
 
-    public void setFoodsCount(int foodsCount) {
-        FoodsCount = foodsCount;
-    }
-
     public void setChair_Delivery_Count(int Chair_Delivery) {
         Chair_Delivery_Count = Chair_Delivery;
+    }
+
+    public void setFoodsCount(int foodsCount) {
+        FoodsCount = foodsCount;
     }
 
     public void addFood (Food food) {

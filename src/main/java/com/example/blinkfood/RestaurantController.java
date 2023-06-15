@@ -8,12 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -58,22 +56,18 @@ public class RestaurantController implements Initializable {
     void Back(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
-        // Get the controller instance for the previous scene
-        MainMenuController mainMenuController = loader.getController();
-        // Pass any necessary data back to the previous scene's controller
-        // mainMenuController.setData(...);
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) BackButton.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        Stage stage = (Stage) ChoiceBox.getScene().getWindow();
+        stage.setTitle("MainMenu");
+        stage.setScene(new Scene(root));
     }
 
     @FXML
     void NextScene(MouseEvent event) throws IOException {
-        PaymentController.setRestaurant(selectedRestaurant);
-        Stage stage = (Stage) DoneButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Payment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
+        Parent root = loader.load();
+        PaymentController paymentController = loader.getController();
+        paymentController.setRestaurant(selectedRestaurant);
+        Stage stage = (Stage) ChoiceBox.getScene().getWindow();
         stage.setTitle("Payment");
         stage.setScene(new Scene(root));
     }
@@ -83,7 +77,7 @@ public class RestaurantController implements Initializable {
         for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
             if (ChoiceBox.getSelectionModel().getSelectedItem().equals(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice())) {
                 if (selectedRestaurant.getFoods().get(i).getCount() > 0) {
-                    selectedRestaurant.getFoods().get(i).removeCount();
+                    selectedRestaurant.getFoods().get(i).reduceCount();
                     Count.setText("x" + selectedRestaurant.getFoods().get(i).getCount());
                 }
                 break;
