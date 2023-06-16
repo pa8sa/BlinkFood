@@ -111,8 +111,9 @@ public class Server {
                     user.setPhoneNumber(data.split(",")[2]);
                     user.setAddress(data.split(",")[3]);
                     user.setEmail(data.split(",")[4]);
+                    user.setBalance(0);
 
-                    writer.write(data + "\n");
+                    writer.write(data + ",0" +"\n");
                     writer.flush();
                     writer.close();
 
@@ -181,6 +182,7 @@ public class Server {
                             user.setPhoneNumber(line.split(",")[2]);
                             user.setAddress(line.split(",")[3]);
                             user.setEmail(line.split(",")[4]);
+                            user.setBalance(Double.parseDouble(line.split(",")[5]));
                             return 1;
                         }
                         line = reader.readLine();
@@ -204,6 +206,35 @@ public class Server {
                 }
             }
             return Restaurants;
+        }
+
+        public static void ResetRestaurants () {
+            for (int i = 0; i < Restaurants.size(); i++) {
+                for (int j = 0; j < Restaurants.get(i).getFoodsCount(); j++) {
+                    Restaurants.get(i).getFoods().get(j).setCount(0);
+                }
+            }
+        }
+
+        public static void EditUser (String Username, double Balance) throws IOException {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
+                StringBuilder content = new StringBuilder();
+                String line;
+                for (;(line = reader.readLine()) != null;) {
+                    if (Username.equals(line.split(",")[0])) {
+                        content.append("\n" + line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] + "," + line.split(",")[4] + "," + Balance + "\n");
+                    }
+                    else content.append(line);
+                }
+                reader.close();
+                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
+                writer.write(content.toString());
+                writer.close();
+                user.setBalance(Balance);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

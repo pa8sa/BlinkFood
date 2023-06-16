@@ -11,13 +11,13 @@
    <children>
       <Button fx:id="DoneButton" layoutX="372.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#Done" text="Done" />
       <Button fx:id="BackButton" layoutX="54.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
-      <ToggleButton fx:id="NormalBank" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0">
+      <ToggleButton fx:id="NormalBank" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0">
          <toggleGroup>
             <ToggleGroup fx:id="Bank" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton fx:id="LimitedBank" layoutX="54.0" layoutY="113.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
-      <ToggleButton fx:id="TaxBank" layoutX="54.0" layoutY="159.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
+      <ToggleButton fx:id="LimitedBank" layoutX="54.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
+      <ToggleButton fx:id="TaxBank" layoutX="54.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
       <Text layoutX="95.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normal Bank">
          <font>
             <Font size="18.0" />
@@ -38,12 +38,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="54.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost With Normal Bank :">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="54.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost With Tax :">
+      <Text layoutX="54.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost :">
          <font>
             <Font size="24.0" />
          </font>
@@ -54,11 +49,6 @@
          </font>
       </Text>
       <Text fx:id="Cost" layoutX="417.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="300.27349853515625">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="CostWithTax" layoutX="417.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="300.27349853515625">
          <font>
             <Font size="24.0" />
          </font>

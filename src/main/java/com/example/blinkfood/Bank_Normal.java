@@ -2,8 +2,7 @@ package com.example.blinkfood;
 
 public class Bank_Normal extends Bank{
     public Bank_Normal (double Cost, double Balance) {
-        super(Cost, Balance);
-        super.Tax = 0;
+        super(Cost, Balance, 0);
     }
 
     @Override

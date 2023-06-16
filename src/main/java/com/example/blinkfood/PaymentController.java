@@ -77,26 +77,21 @@ public class PaymentController implements Initializable {
     @FXML
     void Back(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Restaurant.fxml"));
-        Parent restaurantRoot = loader.load();
+        Parent root = loader.load();
         RestaurantController restaurantController = loader.getController();
-
-        // Pass the selectedRestaurant to the RestaurantController
         restaurantController.setRestaurant(selectedRestaurant);
-
-        // Create a new stage for the Restaurant scene
-        Stage restaurantStage = new Stage();
-        Scene restaurantScene = new Scene(restaurantRoot);
-        restaurantStage.setTitle(selectedRestaurant.getName());
-        restaurantStage.setScene(restaurantScene);
-        restaurantStage.show();
-        Stage currentStage = (Stage) ListView.getScene().getWindow();
-        currentStage.close();
+        Stage stage = (Stage) ListView.getScene().getWindow();
+        stage.setTitle(selectedRestaurant.getName());
+        stage.setScene(new Scene(root));
     }
 
     @FXML
     void Charge(MouseEvent event) throws IOException {
-        Stage stage = (Stage) ChargeButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Charge.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Charge.fxml"));
+        Parent root = loader.load();
+        ChargeController chargeController = loader.getController();
+        chargeController.setRestaurant(selectedRestaurant);
+        Stage stage = (Stage) ListView.getScene().getWindow();
         stage.setTitle("Charge");
         stage.setScene(new Scene(root));
     }
@@ -104,33 +99,39 @@ public class PaymentController implements Initializable {
     @FXML
     void Done(MouseEvent event) throws IOException {
         if (Server.user.getBalance() - TotalCost >= 0) {
-            Stage stage = (Stage) ChargeButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("Done.fxml"));
-            stage.setTitle("Done!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Bank.fxml"));
+            Parent root = loader.load();
+            BankController bankController = loader.getController();
+            bankController.setRestaurant(selectedRestaurant);
+            bankController.setTotalCost(TotalCost);
+            Stage stage = (Stage) ListView.getScene().getWindow();
+            stage.setTitle("Bank");
             stage.setScene(new Scene(root));
         }
     }
 
-
     public void setRestaurant(Restaurant restaurant) {
         selectedRestaurant = restaurant;
+        initializeListView();
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private void initializeListView() {
         for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
             if (selectedRestaurant.getFoods().get(i).getCount() > 0) {
                 ListView.getItems().add(selectedRestaurant.getFoods().get(i).getName() + "   x" + selectedRestaurant.getFoods().get(i).getCount());
                 TotalCost += selectedRestaurant.getFoods().get(i).getCount() * selectedRestaurant.getFoods().get(i).getPrice();
             }
         }
+        CostText.setText(String.valueOf(TotalCost));
+        RestaurantText.setText(selectedRestaurant.getName());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         UsernameText.setText(Server.user.getUserName());
         PhoneNumberText.setText(Server.user.getPhoneNumber());
         AddressText.setText(Server.user.getAddress());
         EmailText.setText(Server.user.getEmail());
         CreditText.setText(String.valueOf(Server.user.getBalance()));
-        CostText.setText(String.valueOf(TotalCost));
-        RestaurantText.setText(selectedRestaurant.getName());
     }
 }

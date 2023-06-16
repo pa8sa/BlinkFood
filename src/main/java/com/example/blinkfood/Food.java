@@ -42,6 +42,10 @@ public class Food {
         Name = name;
     }
 
+    public void setCount(int count) {
+        Count = count;
+    }
+
     public void setPrice(double price) {
         Price = price;
     }
