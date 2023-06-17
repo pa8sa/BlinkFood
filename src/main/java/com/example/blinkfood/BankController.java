@@ -57,7 +57,7 @@ public class BankController implements Initializable {
             if (NBank.Buy(NBank.getBalance(), NBank.getCost()) != -1) {
                 NBank.setBalance(NBank.Buy(NBank.getBalance(), NBank.getCost()));
                 Server.ClientHandler.EditUser(Server.user.getUserName(), NBank.getBalance());
-                BackMainMenu();
+                DoneScene();
             }
         }
         else if (LimitedBank.isSelected()) {
@@ -65,7 +65,7 @@ public class BankController implements Initializable {
             if (LBank.Buy(LBank.getBalance(), LBank.getCost()) != -1) {
                 LBank.setBalance(LBank.Buy(LBank.getBalance(), LBank.getCost()));
                 Server.ClientHandler.EditUser(Server.user.getUserName(), LBank.getBalance());
-                BackMainMenu();
+                DoneScene();
             }
         }
         else if (TaxBank.isSelected()) {
@@ -73,17 +73,16 @@ public class BankController implements Initializable {
             if (TBank.Buy(TBank.getBalance(), TBank.getCost()) != -1) {
                 TBank.setBalance(TBank.Buy(TBank.getBalance(), TBank.getCost()));
                 Server.ClientHandler.EditUser(Server.user.getUserName(), TBank.getBalance());
-                BackMainMenu();
+                DoneScene();
             }
         }
     }
 
-    private void BackMainMenu () throws IOException {
-        Server.ClientHandler.ResetRestaurants();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+    private void DoneScene () throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Done.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) TaxBank.getScene().getWindow();
-        stage.setTitle("MainMenu");
+        stage.setTitle("Done !");
         stage.setScene(new Scene(root));
     }
 
