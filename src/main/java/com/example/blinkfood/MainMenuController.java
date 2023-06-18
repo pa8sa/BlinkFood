@@ -7,14 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainMenuController implements Initializable {
 
@@ -22,6 +25,12 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private TableView<Restaurant> TableView;
+
+    @FXML
+    private RadioButton AddressToggleButton;
+
+    @FXML
+    private RadioButton NameToggleButton;
 
     @FXML
     private TableColumn<Restaurant, String> AddressColumn;
@@ -40,10 +49,21 @@ public class MainMenuController implements Initializable {
 
     static ObservableList<Restaurant> list;
 
+    @FXML
+    private Button SearchButton;
+
+    @FXML
+    private TextField SearchTextField;
+
+    private ArrayList<String> Res_Names = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (sw == 0) {
             list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
+            for (int i = 0; i < list.size(); i++) {
+                Res_Names.add(list.get(i).getName());
+            }
             sw++;
         }
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
@@ -70,4 +90,35 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    @FXML
+    private void Search(MouseEvent event) {
+        String searchText = SearchTextField.getText().trim().toLowerCase();
+        List<Restaurant> searchResults;
+
+        if (NameToggleButton.isSelected()) {
+            searchResults = list.stream()
+                    .filter(restaurant -> restaurant.getName().toLowerCase().contains(searchText))
+                    .collect(Collectors.toList());
+        } else if (AddressToggleButton.isSelected()) {
+            searchResults = list.stream()
+                    .filter(restaurant -> restaurant.getAddress().toLowerCase().contains(searchText))
+                    .collect(Collectors.toList());
+        } else {
+            // Neither toggle button is selected, search in both name and address columns
+            searchResults = list.stream()
+                    .filter(restaurant -> restaurant.getName().toLowerCase().contains(searchText)
+                            || restaurant.getAddress().toLowerCase().contains(searchText))
+                    .collect(Collectors.toList());
+        }
+
+        TableView.setItems(FXCollections.observableArrayList(searchResults));
+    }
+
+
+
+
+    private List<String> searchList (String searchWords, List<String> listOfString) {
+        List <String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
+        return listOfString .stream().filter(input -> {return searchWordsArray.stream().allMatch(word -> input.toLowerCase().contains(word.toLowerCase()));}).collect(Collectors.toList());
+    }
 }
