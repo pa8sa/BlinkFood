@@ -40,11 +40,19 @@ public class LoginController {
     @FXML
     private Text Done;
 
+    int Admin = 0;
+
     @FXML
     void NextScene(MouseEvent event) throws IOException {
         Error.setVisible(false);
         Done.setVisible(false);
-        if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
+        if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 10) {
+            Stage stage = (Stage) ButtonOK.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
+            stage.setTitle("Admin Panel");
+            stage.setScene(new Scene(root));
+        }
+        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
             Done.setVisible(true);
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));

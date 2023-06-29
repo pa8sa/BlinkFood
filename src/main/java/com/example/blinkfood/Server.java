@@ -11,6 +11,7 @@ public class Server {
     public static ArrayList<Restaurant> Restaurants = new ArrayList<>();
     public static int j = 0;
     public static int AllCount = 0;
+
     public static void main(String[] args) {
         final int PORT = 8080;
 
@@ -113,7 +114,61 @@ public class Server {
                     user.setEmail(data.split(",")[4]);
                     user.setBalance(0);
 
-                    writer.write(data + ",0" +"\n");
+                    writer.write(data + ",0" + "\n");
+                    writer.flush();
+                    writer.close();
+
+                    return 1;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (Type.equals("AddRestaurant")) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt", true))) {
+
+                    if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty() || data.split(",")[4].isEmpty() || data.split(",")[5].isEmpty()) {
+                        return -1;
+                    }
+
+                    String line = Server.ClientHandler.readFile("Restaurants", 0);
+                    for (int i = 1; line != null; i++) {
+                        if (line.split(",")[0].equals(data.split(",")[0])) {
+                            return -2;
+                        }
+                        line = Server.ClientHandler.readFile("Restaurants", i);
+                    }
+
+                    if (!data.split(",")[4].matches("\\d+") || !data.split(",")[5].matches("\\d+")) {
+                        return -4;
+                    }
+
+                    writer.write(data + ",1" + "\n");
+                    writer.flush();
+                    writer.close();
+
+                    return 1;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (Type.equals("AddFood")) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt", true))) {
+
+                    if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty()) {
+                        return -1;
+                    }
+
+                    String line = Server.ClientHandler.readFile("Foods", 0);
+                    for (int i = 1; line != null; i++) {
+                        if (line.split(",")[0].equals(data.split(",")[0])) {
+                            return -2;
+                        }
+                        line = Server.ClientHandler.readFile("Foods", i);
+                    }
+
+                    if (!data.split(",")[1].matches("\\d+") || !data.split(",")[2].matches("\\d+")) {
+                        return -4;
+                    }
+
+                    writer.write(data + "\n");
                     writer.flush();
                     writer.close();
 
@@ -125,116 +180,119 @@ public class Server {
             return 0;
         }
 
-        public static String readFile(String Type, int lineNumber) {
-            if (Type.equals("UserSignUp")) {
-                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"))) {
-                    String line;
-                    int currentLineNumber = -1;
-                    while ((line = reader.readLine()) != null) {
-                        currentLineNumber++;
-                        if (currentLineNumber == lineNumber) {
-                            return line;
+            public static String readFile (String Type,int lineNumber){
+                if (Type.equals("UserSignUp")) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"))) {
+                        String line;
+                        int currentLineNumber = -1;
+                        while ((line = reader.readLine()) != null) {
+                            currentLineNumber++;
+                            if (currentLineNumber == lineNumber) {
+                                return line;
+                            }
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (Type.equals("Restaurants")) {
-                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"))) {
-                    String line;
-                    int currentLineNumber = -1;
-                    while ((line = reader.readLine()) != null) {
-                        currentLineNumber++;
-                        if (currentLineNumber == lineNumber) {
-                            return line;
+                } else if (Type.equals("Restaurants")) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"))) {
+                        String line;
+                        int currentLineNumber = -1;
+                        while ((line = reader.readLine()) != null) {
+                            currentLineNumber++;
+                            if (currentLineNumber == lineNumber) {
+                                return line;
+                            }
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (Type.equals("Foods")) {
-                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"))) {
-                    String line;
-                    int currentLineNumber = -1;
-                    while ((line = reader.readLine()) != null) {
-                        currentLineNumber++;
-                        if (currentLineNumber == lineNumber) {
-                            return line;
+                } else if (Type.equals("Foods")) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"))) {
+                        String line;
+                        int currentLineNumber = -1;
+                        while ((line = reader.readLine()) != null) {
+                            currentLineNumber++;
+                            if (currentLineNumber == lineNumber) {
+                                return line;
+                            }
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                return null;
             }
-            return null;
-        }
 
-        public static int checkFile(String Type, String data) {
-            if (Type.equals("UserLogin")) {
-                try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"))) {
-                    String line = reader.readLine();
-                    while (line != null) {
-                        if (line.split(",")[0].equals(data.split(",")[0]) && line.split(",")[1].equals(data.split(",")[1])) {
-                            user.setUserName(line.split(",")[0]);
-                            user.setPassWord(line.split(",")[1]);
-                            user.setPhoneNumber(line.split(",")[2]);
-                            user.setAddress(line.split(",")[3]);
-                            user.setEmail(line.split(",")[4]);
-                            user.setBalance(Double.parseDouble(line.split(",")[5]));
-                            return 1;
+            public static int checkFile (String Type, String data){
+                if (Type.equals("UserLogin")) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"))) {
+                        if (data.split(",")[0].equals("Admin") && data.split(",")[1].equals("adminadmin")) {
+                            return 10;
                         }
-                        line = reader.readLine();
+                        String line = reader.readLine();
+                        while (line != null) {
+                            if (line.split(",")[0].equals(data.split(",")[0]) && line.split(",")[1].equals(data.split(",")[1])) {
+                                user.setUserName(line.split(",")[0]);
+                                user.setPassWord(line.split(",")[1]);
+                                user.setPhoneNumber(line.split(",")[2]);
+                                user.setAddress(line.split(",")[3]);
+                                user.setEmail(line.split(",")[4]);
+                                user.setBalance(Double.parseDouble(line.split(",")[5]));
+                                return 1;
+                            }
+                            line = reader.readLine();
+                        }
+                        return -1;
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    return -1;
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                return 0;
             }
-            return 0;
-        }
 
-        public static ArrayList<Restaurant> getRestaurants () {
-            String line;
-            for (int i = 0; (line = readFile("Restaurants", i)) != null; i++) {
-                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5])));
-                String line2;
-                AllCount += Restaurants.get(i).getFoodsCount();
-                for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
-                    Restaurants.get(i).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
-                }
-            }
-            return Restaurants;
-        }
-
-        public static void ResetRestaurants () {
-            for (int i = 0; i < Restaurants.size(); i++) {
-                for (int j = 0; j < Restaurants.get(i).getFoodsCount(); j++) {
-                    Restaurants.get(i).getFoods().get(j).setCount(0);
-                }
-            }
-        }
-
-        public static void EditUser (String Username, double Balance) throws IOException {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
-                StringBuilder content = new StringBuilder();
+            public static ArrayList<Restaurant> getRestaurants () {
+                Restaurants.clear();
                 String line;
-                for (;(line = reader.readLine()) != null;) {
-                    if (Username.equals(line.split(",")[0])) {
-                        content.append("\n" + line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] + "," + line.split(",")[4] + "," + Balance + "\n");
+                for (int i = 0; (line = readFile("Restaurants", i)) != null; i++) {
+                    if (line.split(",")[6].equals("1")) {
+                        Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5])));
+                        String line2;
+                        AllCount += Restaurants.get(i).getFoodsCount();
+                        for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
+                            Restaurants.get(i).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                        }
                     }
-                    else content.append(line);
                 }
-                reader.close();
-                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
-                writer.write(content.toString());
-                writer.close();
-                user.setBalance(Balance);
-            } catch (IOException e) {
-                e.printStackTrace();
+                return Restaurants;
+            }
+
+            public static void ResetRestaurants () {
+                for (int i = 0; i < Restaurants.size(); i++) {
+                    for (int j = 0; j < Restaurants.get(i).getFoodsCount(); j++) {
+                        Restaurants.get(i).getFoods().get(j).setCount(0);
+                    }
+                }
+            }
+
+            public static void EditUser (String Username,double Balance) throws IOException {
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
+                    StringBuilder content = new StringBuilder();
+                    String line;
+                    for (; (line = reader.readLine()) != null; ) {
+                        if (Username.equals(line.split(",")[0])) {
+                            content.append("\n" + line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] + "," + line.split(",")[4] + "," + Balance + "\n");
+                        } else content.append(line);
+                    }
+                    reader.close();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
+                    writer.write(content.toString());
+                    writer.close();
+                    user.setBalance(Balance);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-}

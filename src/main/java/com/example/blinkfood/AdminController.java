@@ -7,36 +7,46 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class MainMenuController implements Initializable {
+public class AdminController implements Initializable {
 
     private static int sw = 0;
 
-    @FXML
-    private TableView<Restaurant> TableView;
-
-    @FXML
-    private RadioButton AddressToggleButton;
-
-    @FXML
-    private RadioButton NameToggleButton;
+    static ObservableList<Restaurant> list;
 
     @FXML
     private TableColumn<Restaurant, String> AddressColumn;
 
     @FXML
+    private RadioButton AddressToggleButton;
+
+    @FXML
+    private TableColumn<Restaurant, Integer> ChairDeliveryColumn;
+
+    @FXML
     private TableColumn<Restaurant, String> NameColumn;
+
+    @FXML
+    private RadioButton NameToggleButton;
+
+    @FXML
+    private TextField SearchTextField;
+
+    @FXML
+    private TableView<Restaurant> TableView;
 
     @FXML
     private TableColumn<Restaurant, ?> TypeColumn;
@@ -45,46 +55,33 @@ public class MainMenuController implements Initializable {
     private TableColumn<Restaurant, String> WorkingTimeColumn;
 
     @FXML
-    private TableColumn<Restaurant, Integer> ChairDeliveryColumn;
-
-    static ObservableList<Restaurant> list;
-
-    @FXML
-    private Button SearchButton;
-
-    @FXML
-    private TextField SearchTextField;
-
-    private ArrayList<String> Res_Names = new ArrayList<>();
+    void handleTableViewDoubleClick(MouseEvent event) throws IOException {
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+            Restaurant selectedRestaurant = TableView.getSelectionModel().getSelectedItem();
+            if (selectedRestaurant != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminRestaurant.fxml"));
+                Parent root = loader.load();
+//                AdminRestaurant restaurantController = loader.getController();
+//                restaurantController.setRestaurant(selectedRestaurant);
+                Stage stage = (Stage) TableView.getScene().getWindow();
+                stage.setTitle(selectedRestaurant.getName() + " Panel");
+                stage.setScene(new Scene(root));
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (sw == 0) {
-            list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
-            sw++;
+        if (list != null) {
+            list.clear();
         }
+        list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
         ChairDeliveryColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, Integer>("Chair_Delivery_Count"));
         TableView.setItems(list);
-    }
-
-    @FXML
-    private void handleTableViewDoubleClick(MouseEvent event) throws IOException {
-        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-            Restaurant selectedRestaurant = TableView.getSelectionModel().getSelectedItem();
-            if (selectedRestaurant != null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Restaurant.fxml"));
-                Parent root = loader.load();
-                RestaurantController restaurantController = loader.getController();
-                restaurantController.setRestaurant(selectedRestaurant);
-                Stage stage = (Stage) TableView.getScene().getWindow();
-                stage.setTitle(selectedRestaurant.getName());
-                stage.setScene(new Scene(root));
-            }
-        }
     }
 
     @FXML
@@ -111,11 +108,16 @@ public class MainMenuController implements Initializable {
         TableView.setItems(FXCollections.observableArrayList(searchResults));
     }
 
-
-
-
     private List<String> searchList (String searchWords, List<String> listOfString) {
         List <String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
         return listOfString .stream().filter(input -> {return searchWordsArray.stream().allMatch(word -> input.toLowerCase().contains(word.toLowerCase()));}).collect(Collectors.toList());
+    }
+
+    @FXML
+    private void Add(MouseEvent event) throws IOException {
+        Stage stage = (Stage) TableView.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("AdminAddRestaurant.fxml"));
+        stage.setTitle("Admin Panel");
+        stage.setScene(new Scene(root));
     }
 }

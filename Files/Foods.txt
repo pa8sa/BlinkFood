@@ -3,3 +3,6 @@ gheyme,85000,450.3,Sonati
 peperoni,120000,500,FastFood
 rostbeaf,150000,1000,FastFood
 CheeseBurger,50000,400,FastFood
+Mexican Pizza,250000,100,FastFood
+Sabzijat Pizza,65000,85,FastFood
+Kale Pache,175000,450,Sonati
