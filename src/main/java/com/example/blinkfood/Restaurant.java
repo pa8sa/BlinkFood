@@ -11,13 +11,15 @@ public class Restaurant {
     private Res_Type Type;
     private int Chair_Delivery_Count;
     private int FoodsCount;
+    private Boolean Enable;
 
-    public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk) {
+    public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk, Boolean enable) {
         Name = name;
         Address = address;
         WorkTime = workTime;
         Chair_Delivery_Count = Miz_Peyk;
         FoodsCount = foodsCount;
+        Enable = enable;
         if (type.equals("BiroonBar")) {
             Type = Res_Type.BiroonBar;
         }
@@ -28,6 +30,9 @@ public class Restaurant {
         return Chair_Delivery_Count;
     }
 
+    public Boolean getEnable() {
+        return Enable;
+    }
     public String getName() {
         return Name;
     }
@@ -78,6 +83,10 @@ public class Restaurant {
 
     public void setFoodsCount(int foodsCount) {
         FoodsCount = foodsCount;
+    }
+
+    public void setEnable(Boolean enable) {
+        Enable = enable;
     }
 
     public void addFood (Food food) {

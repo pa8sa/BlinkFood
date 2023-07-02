@@ -4,5 +4,7 @@ peperoni,120000,500,FastFood
 rostbeaf,150000,1000,FastFood
 CheeseBurger,50000,400,FastFood
 Mexican Pizza,250000,100,FastFood
-Sabzijat Pizza,65000,85,FastFood
+Italian Pizza,85000.0,85.0,FastFood
+American Burger,132000,120.5,FastFood
+IDK,20000,40,FastFood
 Kale Pache,175000,450,Sonati

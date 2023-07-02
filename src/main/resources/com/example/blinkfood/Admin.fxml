@@ -14,11 +14,12 @@
    <children>
       <TableView fx:id="TableView" layoutX="14.0" layoutY="116.0" onMousePressed="#handleTableViewDoubleClick" prefHeight="388.0" prefWidth="739.0">
          <columns>
-            <TableColumn fx:id="NameColumn" prefWidth="152.7999849319458" text="Name" />
-            <TableColumn fx:id="AddressColumn" prefWidth="208.80003356933594" text="Address" />
-            <TableColumn fx:id="WorkingTimeColumn" prefWidth="116.79998779296875" text="Working Time" />
-            <TableColumn fx:id="TypeColumn" minWidth="0.0" prefWidth="140.79998779296875" text="Type" />
-            <TableColumn fx:id="ChairDeliveryColumn" prefWidth="123.99993896484375" text="Chair/delivery" />
+            <TableColumn fx:id="NameColumn" prefWidth="127.99996662139893" text="Name" />
+            <TableColumn fx:id="AddressColumn" prefWidth="172.80006408691406" text="Address" />
+            <TableColumn fx:id="WorkingTimeColumn" prefWidth="136.0" text="Working Time" />
+            <TableColumn fx:id="TypeColumn" minWidth="0.0" prefWidth="110.39996337890625" text="Type" />
+            <TableColumn fx:id="ChairDeliveryColumn" prefWidth="127.2000732421875" text="Chair/delivery" />
+            <TableColumn fx:id="EnableColumn" prefWidth="62.20001220703125" text="Enable" />
          </columns>
       </TableView>
       <Text layoutX="329.0" layoutY="37.0" onMousePressed="#handleTableViewDoubleClick" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurants">

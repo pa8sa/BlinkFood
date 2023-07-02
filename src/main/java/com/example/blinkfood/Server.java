@@ -10,6 +10,7 @@ public class Server {
     public static User user = new User();
     public static ArrayList<Restaurant> Restaurants = new ArrayList<>();
     public static int j = 0;
+    public static int k = 0;
     public static int AllCount = 0;
 
     public static void main(String[] args) {
@@ -141,7 +142,7 @@ public class Server {
                         return -4;
                     }
 
-                    writer.write(data + ",1" + "\n");
+                    writer.write(data + ",true" + "\n");
                     writer.flush();
                     writer.close();
 
@@ -252,20 +253,41 @@ public class Server {
             }
 
             public static ArrayList<Restaurant> getRestaurants () {
+            k = 0;
                 Restaurants.clear();
                 String line;
-                for (int i = 0; (line = readFile("Restaurants", i)) != null; i++) {
-                    if (line.split(",")[6].equals("1")) {
-                        Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5])));
+                for (int i = 0; (line = readFile("Restaurants", i)) != null; i++, k++) {
+                    if (line.split(",")[6].equals("true")) {
+                        Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6])));
                         String line2;
-                        AllCount += Restaurants.get(i).getFoodsCount();
+                        AllCount += Restaurants.get(k).getFoodsCount();
                         for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
-                            Restaurants.get(i).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                            Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
                         }
+                    }
+                    else {
+                        j += Integer.parseInt(line.split(",")[4]);
+                        AllCount += Integer.parseInt(line.split(",")[4]);
+                        k--;
                     }
                 }
                 return Restaurants;
             }
+
+        public static ArrayList<Restaurant> AdmingetRestaurants () {
+            k = 0;
+            Restaurants.clear();
+            String line;
+            for (int i = 0; (line = readFile("Restaurants", i)) != null; i++, k++) {
+                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6])));
+                String line2;
+                AllCount += Restaurants.get(k).getFoodsCount();
+                for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
+                    Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                }
+            }
+            return Restaurants;
+        }
 
             public static void ResetRestaurants () {
                 for (int i = 0; i < Restaurants.size(); i++) {
@@ -282,8 +304,8 @@ public class Server {
                     String line;
                     for (; (line = reader.readLine()) != null; ) {
                         if (Username.equals(line.split(",")[0])) {
-                            content.append("\n" + line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] + "," + line.split(",")[4] + "," + Balance + "\n");
-                        } else content.append(line);
+                            content.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] + "," + line.split(",")[4] + "," + Balance + "\n");
+                        } else content.append(line + "\n");
                     }
                     reader.close();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\UsersInfo.txt"));
@@ -293,6 +315,207 @@ public class Server {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            public static int EditRestaurant (String OldName, String data) throws IOException{
+                if (data.equals("false")) {
+                    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    StringBuilder content = new StringBuilder();
+                    String line;
+                    for (; (line = reader.readLine()) != null; ) {
+                        if (OldName.equals(line.split(",")[0])) {
+                            content.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] +
+                                    "," + line.split(",")[4] + "," + line.split(",")[5] + ",false" + "\n");
+                        } else content.append(line + "\n");
+                    }
+                    reader.close();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    writer.write(content.toString());
+                    writer.close();
+                    return 1;
+                }
+                else {
+                    try {
+                        if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty() || data.split(",")[4].isEmpty()) {
+                            return -1;
+                        }
+
+                        String line = Server.ClientHandler.readFile("Restaurants", 0);
+                        for (int i = 1; line != null; i++) {
+                            if (line.split(",")[0].equals(data.split(",")[0]) && !OldName.equals(data.split(",")[0])) {
+                                return -2;
+                            }
+                            line = Server.ClientHandler.readFile("Restaurants", i);
+                        }
+
+                        if (!data.split(",")[4].matches("\\d+")) {
+                            return -4;
+                        }
+
+                        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                        StringBuilder content = new StringBuilder();
+
+                        for (line = null; (line = reader.readLine()) != null; ) {
+                            if (OldName.equals(line.split(",")[0])) {
+                                content.append(data.split(",")[0] + "," + data.split(",")[1] + "," + data.split(",")[2] + "," + data.split(",")[3] +
+                                        "," + line.split(",")[4] + "," + data.split(",")[4] + ",true" + "\n");
+                            } else content.append(line + "\n");
+                        }
+                        reader.close();
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                        writer.write(content.toString());
+                        writer.close();
+
+                        return 1;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return 0;
+            }
+
+            public static void RemoveRestaurant (String Name) throws IOException {
+                BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                StringBuilder content = new StringBuilder();
+                StringBuilder contentFoods = new StringBuilder();
+                String line;
+                String lineFoods;
+                int FoodLine = 0;
+
+                for (; (line = reader.readLine()) != null;) {
+                    if (!line.split(",")[0].equals(Name)) {
+                        content.append(line + "\n");
+                        for (int limit = FoodLine + Integer.parseInt(line.split(",")[4]); FoodLine < limit; FoodLine++) {
+                            lineFoods = readFile("Foods", FoodLine);
+                            contentFoods.append(lineFoods + "\n");
+                        }
+                    }
+                    else {
+                        FoodLine += Integer.parseInt(line.split(",")[4]);
+                    }
+                }
+                reader.close();
+                BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                writer.write(content.toString());
+                writer.close();
+                BufferedWriter writerFoods = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                writerFoods.write(contentFoods.toString());
+                writerFoods.close();
+            }
+
+            public static int EditFoods (String Type, String OldName, String data, Restaurant restaurant) throws IOException {
+                if (Type.equals("Remove")) {
+                    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    StringBuilder content = new StringBuilder();
+                    String line;
+                    for (line = null; (line = reader.readLine()) != null; ) {
+                        if (!OldName.equals(line.split(",")[0])) {
+                            content.append(line + "\n");
+                        }
+                    }
+                    restaurant.setFoodsCount(restaurant.getFoodsCount() - 1);
+                    reader.close();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    writer.write(content.toString());
+                    writer.close();
+
+                    BufferedReader readerRestaurants = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    StringBuilder contentRestaurants = new StringBuilder();
+                    for (line = null; (line = readerRestaurants.readLine()) != null; ) {
+                        if (!restaurant.getName().equals(line.split(",")[0])) {
+                            contentRestaurants.append(line + "\n");
+                        }
+                        else {
+                            contentRestaurants.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," +
+                                    line.split(",")[3] + "," + (Integer.parseInt(line.split(",")[4]) - 1) + "," + line.split(",")[5] +
+                                    "," + line.split(",")[6] + "\n");
+                        }
+                    }
+                    readerRestaurants.close();
+                    BufferedWriter writerRestaurants = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    writerRestaurants.write(contentRestaurants.toString());
+                    writerRestaurants.close();
+                    return 1;
+                }
+                else if (Type.equals("Edit")) {
+
+                    if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty()) {
+                        return -1;
+                    }
+
+                    String line = Server.ClientHandler.readFile("Foods", 0);
+                    for (int i = 1; line != null; i++) {
+                        if (line.split(",")[0].equals(data.split(",")[0])) {
+                            return -2;
+                        }
+                        line = Server.ClientHandler.readFile("Restaurants", i);
+                    }
+
+//                    if (!data.split(",")[1].matches("\\d*") || !data.split(",")[2].matches("\\d*")) {
+//                        return -4;
+//                    }
+
+                    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    StringBuilder content = new StringBuilder();
+
+                    for (line = null; (line = reader.readLine()) != null; ) {
+                        if (OldName.equals(line.split(",")[0])) {
+                            content.append(data.split(",")[0] + "," + data.split(",")[1] + "," + data.split(",")[2] + "," +
+                                    data.split(",")[3] + "\n");
+                        } else content.append(line + "\n");
+                    }
+                    reader.close();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    writer.write(content.toString());
+                    writer.close();
+
+                    return 1;
+                }
+                else if (Type.equals("Add")) {
+                    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    StringBuilder contentRestaurants = new StringBuilder();
+                    String line;
+                    int Count = 0;
+                    for (int sw = 0; (line = reader.readLine()) != null; ) {
+                        if (line.split(",")[0].equals(restaurant.getName()) && sw == 0) {
+                            Count += Integer.parseInt(line.split(",")[4]);
+                            sw = 1;
+                            contentRestaurants.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," +
+                                    line.split(",")[3] + "," + (Integer.parseInt(line.split(",")[4]) + 1) + "," + line.split(",")[5] +
+                                    "," + line.split(",")[6] + "\n");
+                        }
+                        else if (sw == 0){
+                            Count += Integer.parseInt(line.split(",")[4]);
+                            contentRestaurants.append(line + "\n");
+                        }
+                        else if (sw == 1) {
+                            contentRestaurants.append(line + "\n");
+                        }
+                    }
+                    BufferedWriter writerRestaurants = new BufferedWriter (new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt"));
+                    writerRestaurants.write(contentRestaurants.toString());
+                    writerRestaurants.close();
+                    reader.close();
+
+                    restaurant.setFoodsCount(restaurant.getFoodsCount() + 1);
+
+                    StringBuilder content = new StringBuilder();
+                    BufferedReader readerFoods = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    for (int i = 0; i < Count; i++) {
+                        line = readerFoods.readLine();
+                        content.append(line + "\n");
+                    }
+                    content.append(data + "\n");
+                    for (; (line = readerFoods.readLine()) != null;) {
+                        content.append(line + "\n");
+                    }
+                    readerFoods.close();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
+                    writer.write(content.toString());
+                    writer.close();
+                    return 1;
+                }
+                return 0;
             }
         }
     }

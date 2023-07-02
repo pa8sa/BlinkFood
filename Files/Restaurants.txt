@@ -1,4 +1,4 @@
-AbbasKabab,mashad,10 ta 23,BaMiz,3,25,1
-BurgerKing,LA,sob,BiroonBar,2,10,1
-Pizza Pizza,sajad,shaba faghat,BiroonBar,2,6,1
-Kale Pazi Haj Mehdi,Tolab,4 ta 8 sob,BaMiz,1,20,1
+AbbasKabab,mashad,10 ta 23,BaMiz,3,25,true
+BurgerKing,LA,Bamdad,BaMiz,2,20,true
+Pizza Pizza,sajad,shaba faghat,BiroonBar,4,6,true
+Kale Pazi Haj Mehdi,Tolab,4 ta 8 sob,BaMiz,1,20,true

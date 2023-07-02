@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 
 public class AdminController implements Initializable {
 
-    private static int sw = 0;
-
     static ObservableList<Restaurant> list;
 
     @FXML
@@ -46,6 +44,9 @@ public class AdminController implements Initializable {
     private TextField SearchTextField;
 
     @FXML
+    private TableColumn<Restaurant, Boolean> EnableColumn;
+
+    @FXML
     private TableView<Restaurant> TableView;
 
     @FXML
@@ -61,8 +62,8 @@ public class AdminController implements Initializable {
             if (selectedRestaurant != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminRestaurant.fxml"));
                 Parent root = loader.load();
-//                AdminRestaurant restaurantController = loader.getController();
-//                restaurantController.setRestaurant(selectedRestaurant);
+                AdminRestaurantController restaurantController = loader.getController();
+                restaurantController.setRestaurant(selectedRestaurant);
                 Stage stage = (Stage) TableView.getScene().getWindow();
                 stage.setTitle(selectedRestaurant.getName() + " Panel");
                 stage.setScene(new Scene(root));
@@ -75,12 +76,13 @@ public class AdminController implements Initializable {
         if (list != null) {
             list.clear();
         }
-        list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
+        list = FXCollections.observableArrayList(Server.ClientHandler.AdmingetRestaurants());
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));
         TypeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
         ChairDeliveryColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, Integer>("Chair_Delivery_Count"));
+        EnableColumn.setCellValueFactory(new PropertyValueFactory<>("Enable"));
         TableView.setItems(list);
     }
 
