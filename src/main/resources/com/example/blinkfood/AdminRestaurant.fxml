@@ -10,37 +10,37 @@
 
 <AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.AdminRestaurantController">
    <children>
-      <TextField fx:id="NameTextField" layoutX="461.0" layoutY="103.0" />
-      <Text layoutX="149.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="83.98199462890625">
+      <TextField fx:id="NameTextField" layoutX="464.0" layoutY="71.0" />
+      <Text layoutX="152.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="83.98199462890625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="AddressTextField" layoutX="462.0" layoutY="149.0" />
-      <Text layoutX="149.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :" wrappingWidth="103.1820068359375">
+      <TextField fx:id="AddressTextField" layoutX="465.0" layoutY="117.0" />
+      <Text layoutX="152.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :" wrappingWidth="103.1820068359375">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="WorkTimeTextField" layoutX="462.0" layoutY="203.0" />
-      <Text layoutX="149.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WorkTime :" wrappingWidth="122.3819580078125">
+      <TextField fx:id="WorkTimeTextField" layoutX="465.0" layoutY="171.0" />
+      <Text layoutX="152.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WorkTime :" wrappingWidth="122.3819580078125">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="TypeTextField" layoutX="462.0" layoutY="255.0" />
-      <Text layoutX="149.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="122.3819580078125">
+      <TextField fx:id="TypeTextField" layoutX="465.0" layoutY="223.0" />
+      <Text layoutX="152.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="122.3819580078125">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="ChairDeliveryTextField" layoutX="462.0" layoutY="306.0" />
-      <Text layoutX="149.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chair/Delivery Count :" wrappingWidth="233.5819091796875">
+      <TextField fx:id="ChairDeliveryTextField" layoutX="465.0" layoutY="274.0" />
+      <Text layoutX="152.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chair/Delivery Count :" wrappingWidth="233.5819091796875">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="350.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#Submit" text="Submit" />
+      <Button layoutX="349.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#Submit" text="Submit" />
       <Button layoutX="89.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#Remove" text="Remove" />
       <Button layoutX="651.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#EditFoods" text="Edit" />
       <Text layoutX="45.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click To Remove Restaurant" />
@@ -51,6 +51,27 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="EnableButton" layoutX="340.0" layoutY="52.0" mnemonicParsing="false" selected="true" text="Enable" toggleGroup="$EnableDisable" />
-      <Button layoutX="357.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
+      <Button layoutX="356.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
+      <TextField fx:id="ImgPathField" layoutX="464.0" layoutY="320.0" />
+      <Text layoutX="152.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Path :" wrappingWidth="233.5819091796875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="NameError" fill="#ff1300" layoutX="316.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Name Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="NumberError" fill="#ff1300" layoutX="265.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chair Delivery Count Must Be Number" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="FillError" fill="#ff1300" layoutX="338.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

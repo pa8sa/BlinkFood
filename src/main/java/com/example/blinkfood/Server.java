@@ -332,10 +332,6 @@ public class Server {
                 }
                 else {
                     try {
-                        if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty() || data.split(",")[4].isEmpty()) {
-                            return -1;
-                        }
-
                         String line = Server.ClientHandler.readFile("Restaurants", 0);
                         for (int i = 1; line != null; i++) {
                             if (line.split(",")[0].equals(data.split(",")[0]) && !OldName.equals(data.split(",")[0])) {

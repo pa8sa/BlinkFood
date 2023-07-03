@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +23,9 @@ public class AdminFoodController {
     static ObservableList<Food> list;
 
     private Restaurant selectedRestaurant;
+
+    @FXML
+    private TextField AddImgPath;
 
     @FXML
     private TextField AddNameField;
@@ -48,6 +52,12 @@ public class AdminFoodController {
     private TextField EditWeightField;
 
     @FXML
+    private TextField EditImgPath;
+
+    @FXML
+    private Text FillError;
+
+    @FXML
     private TableColumn<Food, String> NameColumn;
 
     @FXML
@@ -64,7 +74,11 @@ public class AdminFoodController {
 
     @FXML
     void Add(MouseEvent event) throws IOException {
-        if (Server.ClientHandler.EditFoods("Add", null, AddNameField.getText() + "," + AddPriceField.getText() + "," +
+        FillError.setVisible(false);
+        if (AddTypeField.getText().isEmpty() || AddWeightField.getText().isEmpty() || AddPriceField.getText().isEmpty() || AddNameField.getText().isEmpty()) {
+            FillError.setVisible(true);
+        }
+        else if (Server.ClientHandler.EditFoods("Add", null, AddNameField.getText() + "," + AddPriceField.getText() + "," +
                 AddWeightField.getText() + "," + AddTypeField.getText(), selectedRestaurant) == 1) {
 
         }
@@ -83,6 +97,10 @@ public class AdminFoodController {
 
     @FXML
     void Edit(MouseEvent event) throws IOException {
+        FillError.setVisible(false);
+        if (EditNameField.getText().isEmpty() || EditPriceField.getText().isEmpty() || EditWeightField.getText().isEmpty() || EditTypeField.getText().isEmpty()) {
+            FillError.setVisible(true);
+        }
         if (Server.ClientHandler.EditFoods("Edit", TableView.getSelectionModel().getSelectedItem().getName(), EditNameField.getText() + "," +
                 EditPriceField.getText() + "," + EditWeightField.getText() + "," + EditTypeField.getText(), null) == 1) {
 

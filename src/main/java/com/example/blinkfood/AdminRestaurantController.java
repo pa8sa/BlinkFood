@@ -5,17 +5,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.FloatBuffer;
 
 public class AdminRestaurantController {
 
     @FXML
-    private ToggleGroup EnableDisable;
+    private Text FillError;
+
+    @FXML
+    private TextField ImgPathField;
+
+    @FXML
+    private Text NameError;
+
+    @FXML
+    private Text NumberError;
 
     @FXML
     private RadioButton DisableButton;
@@ -63,8 +73,9 @@ public class AdminRestaurantController {
 
     @FXML
     void Back(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage) DisableButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
         stage.setTitle("Admin Panel");
         stage.setScene(new Scene(root));
     }
@@ -87,10 +98,25 @@ public class AdminRestaurantController {
 
     @FXML
     void Submit(MouseEvent event) throws IOException {
-        if (EnableButton.isSelected()) {
+        FillError.setVisible(false);
+        NameError.setVisible(false);
+        NumberError.setVisible(false);
+        if (NameTextField.getText().isEmpty() || AddressTextField.getText().isEmpty() || WorkTimeTextField.getText().isEmpty() ||
+        TypeTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty()) {
+            FillError.setVisible(true);
+        }
+        else if (EnableButton.isSelected()) {
             if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
                     "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == 1) {
 
+            }
+            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
+                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == -2) {
+                NameError.setVisible(true);
+            }
+            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
+                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == -4) {
+                NumberError.setVisible(true);
             }
         }
         else if (DisableButton.isSelected()) {

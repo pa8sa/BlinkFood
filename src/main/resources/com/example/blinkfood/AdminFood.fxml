@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.AdminFoodController">
    <children>
@@ -25,8 +27,15 @@
       <TextField fx:id="AddPriceField" layoutX="142.0" layoutY="422.0" prefHeight="25.0" prefWidth="176.0" />
       <TextField fx:id="AddWeightField" layoutX="318.0" layoutY="422.0" prefHeight="25.0" prefWidth="135.0" />
       <TextField fx:id="AddTypeField" layoutX="453.0" layoutY="422.0" prefHeight="25.0" prefWidth="111.0" />
-      <Button layoutX="628.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#Add" text="Add" />
-      <Button layoutX="629.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#Edit" text="Edit" />
-      <Button layoutX="365.0" layoutY="469.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
+      <Button layoutX="697.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#Add" text="Add" />
+      <Button layoutX="697.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#Edit" text="Edit" />
+      <Button layoutX="365.0" layoutY="485.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
+      <TextField fx:id="EditImgPath" layoutX="564.0" layoutY="372.0" prefHeight="25.0" prefWidth="128.0" />
+      <TextField fx:id="AddImgPath" layoutX="564.0" layoutY="422.0" prefHeight="25.0" prefWidth="128.0" />
+      <Text fx:id="FillError" fill="#ff1b00" layoutX="348.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
