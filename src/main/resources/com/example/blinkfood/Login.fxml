@@ -30,7 +30,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="Done" fill="#3bcf12" layoutX="101.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Successful" visible="false">
+            <Text fx:id="FillError" fill="#ff0101" layoutX="114.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
                <font>
                   <Font size="14.0" />
                </font>

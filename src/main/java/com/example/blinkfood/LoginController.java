@@ -38,22 +38,28 @@ public class LoginController {
     private Text Error;
 
     @FXML
-    private Text Done;
-
-    int Admin = 0;
+    private Text FillError;
 
     @FXML
     void NextScene(MouseEvent event) throws IOException {
         Error.setVisible(false);
-        Done.setVisible(false);
-        if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 10) {
+        FillError.setVisible(false);
+        if (RadioButtonShowPass.isSelected()) {
+            TextPasswordField.setText(TextPassword.getText());
+        }
+        else {
+            TextPassword.setText(TextPasswordField.getText());
+        }
+        if (TextPassword.getText().isEmpty() || TextUsername.getText().isEmpty()) {
+            FillError.setVisible(true);
+        }
+        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 10) {
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
             stage.setTitle("Admin Panel");
             stage.setScene(new Scene(root));
         }
         else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
-            Done.setVisible(true);
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             stage.setTitle("Restaurants");
@@ -72,6 +78,7 @@ public class LoginController {
             TextPassword.setVisible(true);
         }
         else {
+            TextPasswordField.setText(TextPassword.getText());
             TextPasswordField.setVisible(true);
             TextPassword.setVisible(false);
         }

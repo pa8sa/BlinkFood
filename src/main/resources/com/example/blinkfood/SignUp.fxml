@@ -33,11 +33,6 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="UsernameDone" fill="#3bcf12" layoutX="97.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SignUp Successful" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
             <Text fx:id="EmptyError" fill="#ff0101" layoutX="115.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
                <font>
                   <Font size="14.0" />
@@ -64,6 +59,11 @@
                </font>
             </Text>
             <Text fx:id="EmailTakenError" fill="#ff0101" layoutX="109.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Is Taken" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="FillError" fill="#ff0101" layoutX="116.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
                <font>
                   <Font size="14.0" />
                </font>

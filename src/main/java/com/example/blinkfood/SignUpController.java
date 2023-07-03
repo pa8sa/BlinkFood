@@ -46,9 +46,6 @@ public class SignUpController {
     private Text UsernameError;
 
     @FXML
-    private Text UsernameDone;
-
-    @FXML
     private Text EmptyError;
 
     @FXML
@@ -67,23 +64,36 @@ public class SignUpController {
     private Text PhoneNumberTakenError;
 
     @FXML
+    private Text FillError;
+
+    @FXML
     void NextScene(MouseEvent event) throws InterruptedException, IOException {
+        if (RadioButtonShowPass.isSelected()) {
+            TextPasswordField.setText(TextPassword.getText());
+        }
+        else {
+            TextPassword.setText(TextPasswordField.getText());
+        }
+        FillError.setVisible(false);
         EmptyError.setVisible(false);
         UsernameError.setVisible(false);
         EmailError.setVisible(false);
         PhoneNumberError.setVisible(false);
         PasswordError.setVisible(false);
-        UsernameDone.setVisible(false);
         EmailTakenError.setVisible(false);
         PhoneNumberTakenError.setVisible(false);
+        if (TextUsername.getText().isEmpty() || TextPasswordField.getText().isEmpty() || TextPhoneNumber.getText().isEmpty() || TextAddress.getText().isEmpty() || TextEmail.getText().isEmpty()) {
+            FillError.setVisible(true);
+            return;
+        }
         String Content = TextUsername.getText() + "," + TextPasswordField.getText() + "," + TextPhoneNumber.getText() + "," + TextAddress.getText() + "," + TextEmail.getText();
         if (Server.ClientHandler.writeToFile("UserSignUp", Content) == 1) {
+            FillError.setVisible(false);
             EmptyError.setVisible(false);
             UsernameError.setVisible(false);
             EmailError.setVisible(false);
             PhoneNumberError.setVisible(false);
             PasswordError.setVisible(false);
-            UsernameDone.setVisible(true);
             Stage stage = (Stage) ButtonOK.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             stage.setTitle("Menu");
@@ -120,6 +130,7 @@ public class SignUpController {
             TextPassword.setVisible(true);
         }
         else {
+            TextPasswordField.setText(TextPassword.getText());
             TextPasswordField.setVisible(true);
             TextPassword.setVisible(false);
         }
