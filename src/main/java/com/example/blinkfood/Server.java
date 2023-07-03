@@ -126,10 +126,6 @@ public class Server {
             } else if (Type.equals("AddRestaurant")) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Restaurants.txt", true))) {
 
-                    if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty() || data.split(",")[4].isEmpty() || data.split(",")[5].isEmpty()) {
-                        return -1;
-                    }
-
                     String line = Server.ClientHandler.readFile("Restaurants", 0);
                     for (int i = 1; line != null; i++) {
                         if (line.split(",")[0].equals(data.split(",")[0])) {
@@ -165,7 +161,7 @@ public class Server {
                         line = Server.ClientHandler.readFile("Foods", i);
                     }
 
-                    if (!data.split(",")[1].matches("\\d+") || !data.split(",")[2].matches("\\d+")) {
+                    if (!data.split(",")[1].matches("[0-9.]+") || !data.split(",")[2].matches("[0-9.]+")) {
                         return -4;
                     }
 

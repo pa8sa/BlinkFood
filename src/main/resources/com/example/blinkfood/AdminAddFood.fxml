@@ -6,33 +6,53 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.AdminAddFoodController">
    <children>
-      <TextField fx:id="NameTextField" layoutX="481.0" layoutY="129.0" />
-      <Text layoutX="169.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="83.98199462890625">
+      <TextField fx:id="NameTextField" layoutX="480.0" layoutY="65.0" />
+      <Text layoutX="168.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="83.98199462890625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="PriceTextField" layoutX="481.0" layoutY="178.0" />
-      <Text layoutX="169.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="83.98199462890625">
+      <TextField fx:id="PriceTextField" layoutX="480.0" layoutY="114.0" />
+      <Text layoutX="168.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="83.98199462890625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="WeightTextField" layoutX="481.0" layoutY="231.0" />
-      <Text layoutX="169.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight :" wrappingWidth="91.98199462890625">
+      <TextField fx:id="WeightTextField" layoutX="480.0" layoutY="167.0" />
+      <Text layoutX="168.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight :" wrappingWidth="91.98199462890625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="TypeTextField" layoutX="481.0" layoutY="279.0" />
-      <Text layoutX="169.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="83.98199462890625">
+      <TextField fx:id="TypeTextField" layoutX="480.0" layoutY="215.0" />
+      <Text layoutX="168.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="83.98199462890625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="364.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#Add" text="Add" />
+      <Button layoutX="364.0" layoutY="418.0" mnemonicParsing="false" onMouseClicked="#Add" text="Add" />
+      <Text layoutX="168.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Path :" wrappingWidth="136.78199768066406">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="ImgPathField" layoutX="480.0" layoutY="267.0" />
+      <Text fx:id="FillError" fill="RED" layoutX="345.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill All Fields" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="NameError" fill="RED" layoutX="323.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Name Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="NumberError" fill="RED" layoutX="274.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price And Weight Must Be Number" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
