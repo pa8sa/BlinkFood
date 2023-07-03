@@ -46,8 +46,14 @@ public class BankController implements Initializable {
     private ToggleButton TaxBank;
 
     @FXML
-    void Back(MouseEvent event) {
-
+    void Back(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
+        Parent root = loader.load();
+        PaymentController paymentController = loader.getController();
+        paymentController.setRestaurant(selectedRestaurant);
+        Stage stage = (Stage) NormalBank.getScene().getWindow();
+        stage.setTitle("Payment");
+        stage.setScene(new Scene(root));
     }
 
     @FXML

@@ -5,13 +5,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.DoneController">
+<AnchorPane prefHeight="524.0" prefWidth="766.0" style="-fx-background-color: #bac9f5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.DoneController">
    <children>
       <Text layoutX="254.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Done !">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Button fx:id="BackButton" layoutX="363.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
+      <Button fx:id="BackButton" layoutX="363.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#Back" style="-fx-background-color: #46494f;" text="Back" textFill="WHITE" />
    </children>
 </AnchorPane>

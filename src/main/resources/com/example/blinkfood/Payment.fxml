@@ -6,11 +6,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.PaymentController">
+<AnchorPane prefHeight="524.0" prefWidth="766.0" style="-fx-background-color: #bac9f5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.PaymentController">
    <children>
-      <ListView fx:id="ListView" layoutX="14.0" layoutY="14.0" prefHeight="442.0" prefWidth="290.0" />
-      <Button layoutX="129.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Remove" text="Remove" />
+      <ListView fx:id="ListView" layoutX="14.0" layoutY="14.0" prefHeight="442.0" prefWidth="290.0" style="-fx-background-color: #a4a6ab;" />
+      <Button layoutX="129.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Remove" style="-fx-background-color: #46494f;" text="Remove" textFill="WHITE" />
       <Text layoutX="320.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit :" wrappingWidth="59.200000000000045">
          <font>
             <Font size="18.0" />
@@ -22,7 +21,7 @@
          </font>
       </Text>
       <Text layoutX="560.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press To Charge Your Credit Card" />
-      <Button fx:id="ChargeButton" layoutX="622.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Charge" text="Charge" />
+      <Button fx:id="ChargeButton" layoutX="622.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#Charge" style="-fx-background-color: #46494f;" text="Charge" textFill="WHITE" />
       <Text layoutX="320.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" wrappingWidth="90.4000122070313">
          <font>
             <Font size="18.0" />
@@ -83,7 +82,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="BackButton" layoutX="334.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="26.0" prefWidth="48.0" text="Back" />
-      <Button fx:id="DoneButton" layoutX="386.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Done" prefHeight="26.0" prefWidth="48.0" text="Done" />
+      <Button fx:id="BackButton" layoutX="334.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="26.0" prefWidth="48.0" style="-fx-background-color: #46494f;" text="Back" textFill="WHITE" />
+      <Button fx:id="DoneButton" layoutX="386.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#Done" prefHeight="26.0" prefWidth="48.0" style="-fx-background-color: #46494f;" text="Done" textFill="WHITE" />
    </children>
 </AnchorPane>

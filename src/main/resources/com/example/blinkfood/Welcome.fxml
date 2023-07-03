@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" style="-fx-background-color: #bac9f5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.WelcomeController">
-    <Text fill="#46494f" layoutX="264.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To IDK" textAlignment="CENTER">
+    <Text layoutX="264.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To IDK" textAlignment="CENTER">
         <font>
           <Font name="Eras Demi ITC" size="30.0" />
         </font>

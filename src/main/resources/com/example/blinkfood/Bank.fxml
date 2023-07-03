@@ -7,32 +7,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.BankController">
+<AnchorPane prefHeight="524.0" prefWidth="766.0" style="-fx-background-color: #bac9f5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.BankController">
    <children>
-      <Button fx:id="DoneButton" layoutX="372.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#Done" text="Done" />
-      <Button fx:id="BackButton" layoutX="54.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
-      <ToggleButton fx:id="NormalBank" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0">
+      <Button fx:id="DoneButton" layoutX="372.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#Done" style="-fx-background-color: #46494f;" text="Done" textFill="WHITE" />
+      <Button fx:id="BackButton" layoutX="54.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#Back" style="-fx-background-color: #46494f;" text="Back" textFill="WHITE" />
+      <ToggleButton fx:id="NormalBank" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="93.0" style="-fx-background-color: #46494f;" text="Nomal Bank" textFill="WHITE">
          <toggleGroup>
             <ToggleGroup fx:id="Bank" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton fx:id="LimitedBank" layoutX="54.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
-      <ToggleButton fx:id="TaxBank" layoutX="54.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="25.0" toggleGroup="$Bank" />
-      <Text layoutX="95.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normal Bank">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="95.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Limited Bank">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="95.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank With Tax">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <ToggleButton fx:id="LimitedBank" layoutX="54.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #46494f;" text="Limited Bank" textFill="WHITE" toggleGroup="$Bank" />
+      <ToggleButton fx:id="TaxBank" layoutX="54.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onToggleButtonClick" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #46494f;" text="Bank With Tax" textFill="WHITE" toggleGroup="$Bank" />
       <Text layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance :">
          <font>
             <Font size="24.0" />

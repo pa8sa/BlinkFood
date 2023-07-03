@@ -10,9 +10,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="766.0" style="-fx-background-color: #bac9f5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blinkfood.MainMenuController">
     <children>
-        <TableView fx:id="TableView" layoutX="14.0" layoutY="116.0" onMousePressed="#handleTableViewDoubleClick" prefHeight="394.0" prefWidth="739.0">
+        <TextField fx:id="SearchTextField" layoutX="223.0" layoutY="63.0" prefHeight="28.0" prefWidth="322.0" promptText="Name / Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
+        <TableView fx:id="TableView" layoutX="14.0" layoutY="116.0" onMousePressed="#handleTableViewDoubleClick" prefHeight="394.0" prefWidth="739.0" style="-fx-background-color: #a4a6ab;">
             <columns>
                 <TableColumn fx:id="NameColumn" prefWidth="152.7999849319458" text="Name" />
                 <TableColumn fx:id="AddressColumn" prefWidth="208.80003356933594" text="Address" />
@@ -21,13 +22,12 @@
                 <TableColumn fx:id="ChairDeliveryColumn" prefWidth="123.99993896484375" text="Chair/delivery" />
             </columns>
         </TableView>
-        <Text layoutX="329.0" layoutY="37.0" onMousePressed="#handleTableViewDoubleClick" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurants">
+        <Text layoutX="316.0" layoutY="36.0" onMousePressed="#handleTableViewDoubleClick" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurants">
             <font>
-                <Font size="21.0" />
+                <Font name="Eras Demi ITC" size="24.0" />
             </font>
         </Text>
-        <TextField fx:id="SearchTextField" layoutX="201.0" layoutY="63.0" prefHeight="28.0" prefWidth="322.0" />
-        <Button fx:id="SearchButton" layoutX="523.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#Search" prefHeight="28.0" prefWidth="56.0" text="Search" />
+        <Button fx:id="SearchButton" layoutX="553.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#Search" prefHeight="28.0" prefWidth="56.0" style="-fx-background-color: #46494f;" text="Search" textFill="WHITE" />
         <RadioButton fx:id="NameToggleButton" layoutX="121.0" layoutY="54.0" mnemonicParsing="false" text="Name">
             <toggleGroup>
                 <ToggleGroup fx:id="SearchToggleGroup" />
