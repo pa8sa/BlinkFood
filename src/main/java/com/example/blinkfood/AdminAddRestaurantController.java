@@ -51,11 +51,12 @@ public class AdminAddRestaurantController {
         CountError.setVisible(false);
         NameError.setVisible(false);
         if (NameTextField.getText().isEmpty() || AddressTextField.getText().isEmpty() || WorkTimeTextField.getText().isEmpty() ||
-        TypeTextField.getText().isEmpty() || FoodCountTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty()) {
+        TypeTextField.getText().isEmpty() || FoodCountTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty() || ImgPathField.getText().isEmpty()) {
             FillError.setVisible(true);
         }
         else if (Server.ClientHandler.writeToFile("AddRestaurant", NameTextField.getText() + "," + AddressTextField.getText() + "," +
-                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText()) == 1 ) {
+                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText() + "," +
+                ImgPathField.getText()) == 1 ) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminAddFood.fxml"));
             Parent root = loader.load();
             AdminAddFoodController adminAddFoodController = loader.getController();
@@ -65,11 +66,13 @@ public class AdminAddRestaurantController {
             stage.setScene(new Scene(root));
         }
         else if (Server.ClientHandler.writeToFile("AddRestaurant", NameTextField.getText() + "," + AddressTextField.getText() + "," +
-                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText()) == -2 ) {
+                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText() +
+                "," + ImgPathField.getText()) == -2 ) {
             NameError.setVisible(true);
         }
         else if (Server.ClientHandler.writeToFile("AddRestaurant", NameTextField.getText() + "," + AddressTextField.getText() + "," +
-                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText()) == -4 ) {
+                WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + FoodCountTextField.getText() + "," + ChairDeliveryTextField.getText() +
+                "," + ImgPathField) == -4 ) {
             CountError.setVisible(true);
         }
     }

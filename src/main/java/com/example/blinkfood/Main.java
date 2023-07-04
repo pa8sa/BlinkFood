@@ -17,6 +17,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
         stage.setTitle("Welcome");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
 
         Socket socket = new Socket("localhost", 8080);

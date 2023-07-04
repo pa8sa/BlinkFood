@@ -7,11 +7,14 @@ public class Food {
     private enum Food_Type {Sonati, FastFood};
     private Food_Type Type;
     private int Count;
+    private String IMGpath;
 
-    public Food (String Name, double Price, double Weight, String Type) {
+
+    public Food (String Name, double Price, double Weight, String Type, String imgpath) {
         this.Name = Name;
         this.Weight = Weight;
         this.Price = Price;
+        IMGpath = imgpath;
         if (Type.equals("Sonati")) {
             this.Type = Food_Type.Sonati;
         }
@@ -38,6 +41,10 @@ public class Food {
         Type = type;
     }
 
+    public void setIMGpath(String IMGpath) {
+        this.IMGpath = IMGpath;
+    }
+
     public void setName(String name) {
         Name = name;
     }
@@ -56,6 +63,10 @@ public class Food {
 
     public int getCount() {
         return Count;
+    }
+
+    public String getIMGpath() {
+        return IMGpath;
     }
 
     public void addCount() {

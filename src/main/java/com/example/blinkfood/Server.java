@@ -138,7 +138,9 @@ public class Server {
                         return -4;
                     }
 
-                    writer.write(data + ",true" + "\n");
+                    writer.write(data.split(",")[0] + "," + data.split(",")[1] + "," + data.split(",")[2] + "," +
+                            data.split(",")[3] + "," + data.split(",")[4] + "," + data.split(",")[5] + "," + "true" +
+                            "," + data.split(",")[6] + "\n");
                     writer.flush();
                     writer.close();
 
@@ -148,10 +150,6 @@ public class Server {
                 }
             } else if (Type.equals("AddFood")) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt", true))) {
-
-                    if (data.split(",")[0].isEmpty() || data.split(",")[1].isEmpty() || data.split(",")[2].isEmpty() || data.split(",")[3].isEmpty()) {
-                        return -1;
-                    }
 
                     String line = Server.ClientHandler.readFile("Foods", 0);
                     for (int i = 1; line != null; i++) {
@@ -254,11 +252,11 @@ public class Server {
                 String line;
                 for (int i = 0; (line = readFile("Restaurants", i)) != null; i++, k++) {
                     if (line.split(",")[6].equals("true")) {
-                        Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6])));
+                        Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6]), line.split(",")[7]));
                         String line2;
                         AllCount += Restaurants.get(k).getFoodsCount();
                         for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
-                            Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                            Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3], line2.split(",")[4]));
                         }
                     }
                     else {
@@ -275,11 +273,11 @@ public class Server {
             Restaurants.clear();
             String line;
             for (int i = 0; (line = readFile("Restaurants", i)) != null; i++, k++) {
-                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6])));
+                Restaurants.add(new Restaurant(line.split(",")[0], line.split(",")[1], line.split(",")[2], line.split(",")[3], Integer.parseInt(line.split(",")[4]), Integer.parseInt(line.split(",")[5]), Boolean.valueOf(line.split(",")[6]), line.split(",")[7]));
                 String line2;
                 AllCount += Restaurants.get(k).getFoodsCount();
                 for (; j < AllCount && (line2 = readFile("Foods", j)) != null; j++) {
-                    Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3]));
+                    Restaurants.get(k).addFood(new Food(line2.split(",")[0], Double.parseDouble(line2.split(",")[1]), Double.parseDouble(line2.split(",")[2]), line2.split(",")[3], line2.split(",")[4]));
                 }
             }
             return Restaurants;

@@ -75,11 +75,12 @@ public class AdminFoodController {
     @FXML
     void Add(MouseEvent event) throws IOException {
         FillError.setVisible(false);
-        if (AddTypeField.getText().isEmpty() || AddWeightField.getText().isEmpty() || AddPriceField.getText().isEmpty() || AddNameField.getText().isEmpty()) {
+        if (AddTypeField.getText().isEmpty() || AddWeightField.getText().isEmpty() || AddPriceField.getText().isEmpty() || AddNameField.getText().isEmpty() ||
+        AddImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
         }
         else if (Server.ClientHandler.EditFoods("Add", null, AddNameField.getText() + "," + AddPriceField.getText() + "," +
-                AddWeightField.getText() + "," + AddTypeField.getText(), selectedRestaurant) == 1) {
+                AddWeightField.getText() + "," + AddTypeField.getText() + "," + AddImgPath.getText(), selectedRestaurant) == 1) {
 
         }
     }
@@ -98,11 +99,12 @@ public class AdminFoodController {
     @FXML
     void Edit(MouseEvent event) throws IOException {
         FillError.setVisible(false);
-        if (EditNameField.getText().isEmpty() || EditPriceField.getText().isEmpty() || EditWeightField.getText().isEmpty() || EditTypeField.getText().isEmpty()) {
+        if (EditNameField.getText().isEmpty() || EditPriceField.getText().isEmpty() || EditWeightField.getText().isEmpty() || EditTypeField.getText().isEmpty() ||
+        EditImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
         }
         if (Server.ClientHandler.EditFoods("Edit", TableView.getSelectionModel().getSelectedItem().getName(), EditNameField.getText() + "," +
-                EditPriceField.getText() + "," + EditWeightField.getText() + "," + EditTypeField.getText(), null) == 1) {
+                EditPriceField.getText() + "," + EditWeightField.getText() + "," + EditTypeField.getText() + "," + EditImgPath.getText(), null) == 1) {
 
         }
     }

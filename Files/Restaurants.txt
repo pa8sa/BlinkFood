@@ -1,4 +1,4 @@
-AbbasKabab,mashad,10 ta 23,BaMiz,3,25,true
-BurgerKing,LA,Bamdad,BaMiz,2,20,true
-Pizza Pizza,sajad,shaba faghat,BiroonBar,4,6,true
-Kale Pazi Haj Mehdi,Tolab,4 ta 8 sob,BaMiz,1,20,true
+AbbasKabab,mashad,10 ta 23,BaMiz,3,25,true,C:\Users\PARSA-PC\BlinkFood\src\main\resources\com\example\blinkfood\Images\Restaurants\AbbasKabab.jpg
+BurgerKing,LA,Bamdad,BaMiz,2,20,true,C:\Users\PARSA-PC\BlinkFood\src\main\resources\com\example\blinkfood\Images\Restaurants\BurgerKing.jpg
+Pizza Pizza,sajad,shaba faghat,BiroonBar,4,6,true,C:\Users\PARSA-PC\BlinkFood\src\main\resources\com\example\blinkfood\Images\Restaurants\Pizza Pizza.jpg
+Kale Pazi Haj Mehdi,Tolab,4 ta 8 sob,BaMiz,1,20,true,C:\Users\PARSA-PC\BlinkFood\src\main\resources\com\example\blinkfood\Images\Restaurants\Kale Pazi Haj Mehdi.jpg

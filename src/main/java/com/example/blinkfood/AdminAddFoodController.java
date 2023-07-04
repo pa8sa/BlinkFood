@@ -45,12 +45,13 @@ public class AdminAddFoodController {
         FillError.setVisible(false);
         NameError.setVisible(false);
         NumberError.setVisible(false);
-        if (NameTextField.getText().isEmpty() || PriceTextField.getText().isEmpty() || WeightTextField.getText().isEmpty() || TypeTextField.getText().isEmpty()) {
+        if (NameTextField.getText().isEmpty() || PriceTextField.getText().isEmpty() || WeightTextField.getText().isEmpty() || TypeTextField.getText().isEmpty() ||
+        ImgPathField.getText().isEmpty()) {
             FillError.setVisible(true);
             return;
         }
         else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText()) == 1) {
+                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == 1) {
             i++;
             NameTextField.clear();
             PriceTextField.clear();
@@ -58,12 +59,12 @@ public class AdminAddFoodController {
             TypeTextField.clear();
         }
         else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText()) == -2) {
+                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == -2) {
             NameError.setVisible(true);
             return;
         }
         else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText()) == -4) {
+                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == -4) {
             NumberError.setVisible(true);
             return;
         }

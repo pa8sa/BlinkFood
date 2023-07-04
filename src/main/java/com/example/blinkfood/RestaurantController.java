@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,6 +39,12 @@ public class RestaurantController implements Initializable {
     private Label nameLabel;
 
     private Restaurant selectedRestaurant;
+
+    @FXML
+    private ImageView Image;
+
+    @FXML
+    private ImageView FoodImage;
 
     @FXML
     private ChoiceBox<String> ChoiceBox;
@@ -88,6 +96,7 @@ public class RestaurantController implements Initializable {
     public void setRestaurant(Restaurant restaurant) {
         selectedRestaurant = restaurant;
         nameLabel.setText(restaurant.getName());
+        Image.setImage(new Image(selectedRestaurant.getIMGpath()));
         for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
             ChoiceBox.getItems().add(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice());
         }
@@ -99,6 +108,7 @@ public class RestaurantController implements Initializable {
         for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
             if (ChoiceBox.getSelectionModel().getSelectedItem().equals(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice())) {
                 Count.setText("x" + selectedRestaurant.getFoods().get(i).getCount());
+                FoodImage.setImage(new Image(selectedRestaurant.getFoods().get(i).getIMGpath()));
                 break;
             }
         }

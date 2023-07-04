@@ -12,14 +12,16 @@ public class Restaurant {
     private int Chair_Delivery_Count;
     private int FoodsCount;
     private Boolean Enable;
+    private String IMGpath;
 
-    public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk, Boolean enable) {
+    public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk, Boolean enable, String imgpath) {
         Name = name;
         Address = address;
         WorkTime = workTime;
         Chair_Delivery_Count = Miz_Peyk;
         FoodsCount = foodsCount;
         Enable = enable;
+        IMGpath = imgpath;
         if (type.equals("BiroonBar")) {
             Type = Res_Type.BiroonBar;
         }
@@ -43,6 +45,10 @@ public class Restaurant {
 
     public Res_Type getType() {
         return Type;
+    }
+
+    public String getIMGpath() {
+        return IMGpath;
     }
 
     public String getWorkTime() {
@@ -75,6 +81,10 @@ public class Restaurant {
 
     public void setWorkTime(String workTime) {
         WorkTime = workTime;
+    }
+
+    public void setIMGpath(String IMGpath) {
+        this.IMGpath = IMGpath;
     }
 
     public void setChair_Delivery_Count(int Chair_Delivery) {
