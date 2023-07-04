@@ -319,7 +319,7 @@ public class Server {
                     for (; (line = reader.readLine()) != null; ) {
                         if (OldName.equals(line.split(",")[0])) {
                             content.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," + line.split(",")[3] +
-                                    "," + line.split(",")[4] + "," + line.split(",")[5] + ",false" + "\n");
+                                    "," + line.split(",")[4] + "," + line.split(",")[5] + ",false," + line.split(",")[7] +"\n");
                         } else content.append(line + "\n");
                     }
                     reader.close();
@@ -348,7 +348,7 @@ public class Server {
                         for (line = null; (line = reader.readLine()) != null; ) {
                             if (OldName.equals(line.split(",")[0])) {
                                 content.append(data.split(",")[0] + "," + data.split(",")[1] + "," + data.split(",")[2] + "," + data.split(",")[3] +
-                                        "," + line.split(",")[4] + "," + data.split(",")[4] + ",true" + "\n");
+                                        "," + line.split(",")[4] + "," + data.split(",")[4] + ",true," + data.split(",")[5] +"\n");
                             } else content.append(line + "\n");
                         }
                         reader.close();
@@ -418,7 +418,7 @@ public class Server {
                         else {
                             contentRestaurants.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," +
                                     line.split(",")[3] + "," + (Integer.parseInt(line.split(",")[4]) - 1) + "," + line.split(",")[5] +
-                                    "," + line.split(",")[6] + "\n");
+                                    "," + line.split(",")[6] + "," + line.split(",")[7] +"\n");
                         }
                     }
                     readerRestaurants.close();
@@ -441,9 +441,9 @@ public class Server {
                         line = Server.ClientHandler.readFile("Restaurants", i);
                     }
 
-//                    if (!data.split(",")[1].matches("\\d*") || !data.split(",")[2].matches("\\d*")) {
-//                        return -4;
-//                    }
+                    if (!data.split(",")[1].matches("[0-9.]+") || !data.split(",")[2].matches("[0-9.]+")) {
+                        return -4;
+                    }
 
                     BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\PARSA-PC\\BlinkFood\\Files\\Foods.txt"));
                     StringBuilder content = new StringBuilder();
@@ -451,7 +451,7 @@ public class Server {
                     for (line = null; (line = reader.readLine()) != null; ) {
                         if (OldName.equals(line.split(",")[0])) {
                             content.append(data.split(",")[0] + "," + data.split(",")[1] + "," + data.split(",")[2] + "," +
-                                    data.split(",")[3] + "\n");
+                                    data.split(",")[3] + "," + data.split(",")[4] + "\n");
                         } else content.append(line + "\n");
                     }
                     reader.close();
@@ -472,7 +472,7 @@ public class Server {
                             sw = 1;
                             contentRestaurants.append(line.split(",")[0] + "," + line.split(",")[1] + "," + line.split(",")[2] + "," +
                                     line.split(",")[3] + "," + (Integer.parseInt(line.split(",")[4]) + 1) + "," + line.split(",")[5] +
-                                    "," + line.split(",")[6] + "\n");
+                                    "," + line.split(",")[6] + "," + line.split(",")[7] + "\n");
                         }
                         else if (sw == 0){
                             Count += Integer.parseInt(line.split(",")[4]);

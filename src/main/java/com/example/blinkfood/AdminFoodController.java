@@ -17,10 +17,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AdminFoodController {
 
-    static ObservableList<Food> list;
+    public static ObservableList<Food> list;
 
     private Restaurant selectedRestaurant;
 
@@ -111,8 +113,10 @@ public class AdminFoodController {
 
     @FXML
     void Remove(MouseEvent event) throws IOException {
-        Server.ClientHandler.EditFoods("Remove", TableView.getSelectionModel().getSelectedItem().getName(), selectedRestaurant.getName(), selectedRestaurant);
-        setTableView(TableView.getSelectionModel().getSelectedItem());
+        if (!TableView.getSelectionModel().isEmpty()) {
+            Server.ClientHandler.EditFoods("Remove", TableView.getSelectionModel().getSelectedItem().getName(), selectedRestaurant.getName(), selectedRestaurant);
+            setTableView(TableView.getSelectionModel().getSelectedItem());
+        }
     }
 
     public void setRestaurant (Restaurant restaurant) {
@@ -135,6 +139,7 @@ public class AdminFoodController {
             EditWeightField.clear();
             EditPriceField.clear();
             EditNameField.clear();
+            EditImgPath.clear();
         }
         TableView.setItems(list);
     }
@@ -148,6 +153,7 @@ public class AdminFoodController {
                 EditPriceField.setText(String.valueOf(selectedFood.getPrice()));
                 EditTypeField.setText(String.valueOf(selectedFood.getType()));
                 EditWeightField.setText(String.valueOf(selectedFood.getWeight()));
+                EditImgPath.setText(selectedFood.getIMGpath());
             }
         });
     }

@@ -15,6 +15,8 @@ import java.nio.FloatBuffer;
 
 public class AdminRestaurantController {
 
+    public static int sw = 0;
+
     @FXML
     private Text FillError;
 
@@ -69,6 +71,7 @@ public class AdminRestaurantController {
         WorkTimeTextField.setText(selectedRestaurant.getWorkTime());
         ChairDeliveryTextField.setText(String.valueOf(selectedRestaurant.getChair_Delivery_Count()));
         TypeTextField.setText(String.valueOf(selectedRestaurant.getType()));
+        ImgPathField.setText(selectedRestaurant.getIMGpath());
     }
 
     @FXML
@@ -102,20 +105,20 @@ public class AdminRestaurantController {
         NameError.setVisible(false);
         NumberError.setVisible(false);
         if (NameTextField.getText().isEmpty() || AddressTextField.getText().isEmpty() || WorkTimeTextField.getText().isEmpty() ||
-        TypeTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty()) {
+        TypeTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty() || ImgPathField.getText().isEmpty()) {
             FillError.setVisible(true);
         }
         else if (EnableButton.isSelected()) {
             if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == 1) {
+                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == 1) {
 
             }
             if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == -2) {
+                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == -2) {
                 NameError.setVisible(true);
             }
             if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText()) == -4) {
+                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == -4) {
                 NumberError.setVisible(true);
             }
         }
