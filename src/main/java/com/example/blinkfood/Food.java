@@ -8,13 +8,14 @@ public class Food {
     private Food_Type Type;
     private int Count;
     private String IMGpath;
+    private int Food_ID;
 
-
-    public Food (String Name, double Price, double Weight, String Type, String imgpath) {
+    public Food (String Name, double Price, double Weight, String Type, String imgpath, int food_id) {
         this.Name = Name;
         this.Weight = Weight;
         this.Price = Price;
         IMGpath = imgpath;
+        Food_ID = food_id;
         if (Type.equals("Sonati")) {
             this.Type = Food_Type.Sonati;
         }
@@ -23,6 +24,10 @@ public class Food {
 
     public String getName() {
         return Name;
+    }
+
+    public int getFood_ID() {
+        return Food_ID;
     }
 
     public double getPrice() {
@@ -59,6 +64,10 @@ public class Food {
 
     public void setWeight(double weight) {
         Weight = weight;
+    }
+
+    public void setFood_ID(int food_ID) {
+        Food_ID = food_ID;
     }
 
     public int getCount() {

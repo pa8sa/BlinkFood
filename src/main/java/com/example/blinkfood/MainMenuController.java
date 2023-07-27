@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,16 +11,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class MainMenuController implements Initializable {
-
-    private static int sw = 0;
+public class MainMenuController {
 
     @FXML
     private TableView<Restaurant> TableView;
@@ -50,19 +45,13 @@ public class MainMenuController implements Initializable {
     static ObservableList<Restaurant> list;
 
     @FXML
-    private Button SearchButton;
-
-    @FXML
     private TextField SearchTextField;
 
-    private ArrayList<String> Res_Names = new ArrayList<>();
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (sw == 0) {
-            list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
-            sw++;
+    public void setTableView () throws SQLException {
+        if (list != null) {
+            list.clear();
         }
+        list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));
@@ -110,9 +99,6 @@ public class MainMenuController implements Initializable {
 
         TableView.setItems(FXCollections.observableArrayList(searchResults));
     }
-
-
-
 
     private List<String> searchList (String searchWords, List<String> listOfString) {
         List <String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));

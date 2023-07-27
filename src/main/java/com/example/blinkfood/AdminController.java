@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
@@ -15,13 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class AdminController implements Initializable {
+public class AdminController {
 
     static ObservableList<Restaurant> list;
 
@@ -71,12 +69,11 @@ public class AdminController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void setTableView() throws SQLException {
         if (list != null) {
             list.clear();
         }
-        list = FXCollections.observableArrayList(Server.ClientHandler.AdmingetRestaurants());
+        list = FXCollections.observableArrayList(Server.ClientHandler.getRestaurants());
         NameColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Name"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Address"));
         WorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("WorkTime"));

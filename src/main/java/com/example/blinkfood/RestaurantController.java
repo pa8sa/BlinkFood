@@ -24,18 +24,6 @@ public class RestaurantController implements Initializable {
     private Text Count;
 
     @FXML
-    private Button AddButton;
-
-    @FXML
-    private Button BackButton;
-
-    @FXML
-    private Button DoneButton;
-
-    @FXML
-    private Button RemoveButton;
-
-    @FXML
     private Label nameLabel;
 
     private Restaurant selectedRestaurant;
@@ -51,7 +39,7 @@ public class RestaurantController implements Initializable {
 
     @FXML
     void Add(MouseEvent event) {
-        for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+        for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
             if (ChoiceBox.getSelectionModel().getSelectedItem().equals(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice())) {
                 selectedRestaurant.getFoods().get(i).addCount();
                 Count.setText("x" + selectedRestaurant.getFoods().get(i).getCount());
@@ -82,7 +70,7 @@ public class RestaurantController implements Initializable {
 
     @FXML
     void Remove(MouseEvent event) {
-        for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+        for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
             if (ChoiceBox.getSelectionModel().getSelectedItem().equals(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice())) {
                 if (selectedRestaurant.getFoods().get(i).getCount() > 0) {
                     selectedRestaurant.getFoods().get(i).reduceCount();
@@ -97,7 +85,7 @@ public class RestaurantController implements Initializable {
         selectedRestaurant = restaurant;
         nameLabel.setText(restaurant.getName());
         Image.setImage(new Image(selectedRestaurant.getIMGpath()));
-        for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+        for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
             ChoiceBox.getItems().add(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice());
         }
     }
@@ -105,7 +93,7 @@ public class RestaurantController implements Initializable {
     @FXML
     void onChoiceBoxSelectionChanged(ActionEvent event) {
         String selectedItem = ChoiceBox.getSelectionModel().getSelectedItem();
-        for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+        for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
             if (ChoiceBox.getSelectionModel().getSelectedItem().equals(selectedRestaurant.getFoods().get(i).getName() + "  " + selectedRestaurant.getFoods().get(i).getPrice())) {
                 Count.setText("x" + selectedRestaurant.getFoods().get(i).getCount());
                 FoodImage.setImage(new Image(selectedRestaurant.getFoods().get(i).getIMGpath()));

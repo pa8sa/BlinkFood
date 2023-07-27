@@ -13,11 +13,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
-
-    @FXML
-    private Button ButtonOK;
 
     @FXML
     private Button ButtonSignUp;
@@ -41,7 +39,7 @@ public class LoginController {
     private Text FillError;
 
     @FXML
-    void NextScene(MouseEvent event) throws IOException {
+    void NextScene(MouseEvent event) throws SQLException, IOException {
         Error.setVisible(false);
         FillError.setVisible(false);
         if (RadioButtonShowPass.isSelected()) {
@@ -52,21 +50,29 @@ public class LoginController {
         }
         if (TextPassword.getText().isEmpty() || TextUsername.getText().isEmpty()) {
             FillError.setVisible(true);
+            return;
         }
-        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 10) {
-            Stage stage = (Stage) ButtonOK.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
-            stage.setTitle("Admin Panel");
-            stage.setScene(new Scene(root));
-        }
-        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == 1) {
-            Stage stage = (Stage) ButtonOK.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            stage.setTitle("Restaurants");
-            stage.setScene(new Scene(root));
-        }
-        else if (Server.ClientHandler.checkFile("UserLogin", TextUsername.getText() + "," + TextPasswordField.getText()) == -1) {
+        String phrase = Server.ClientHandler.checkUsers(TextUsername.getText(), TextPassword.getText());
+        if (phrase.equals("wrong")){
             Error.setVisible(true);
+        }
+        else if (phrase.equals("admin")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
+            Parent root = loader.load();
+            AdminController adminController = loader.getController();
+            adminController.setTableView();
+            Stage stage = (Stage) FillError.getScene().getWindow();
+            stage.setTitle("Admin");
+            stage.setScene(new Scene(root));
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+            Parent root = loader.load();
+            MainMenuController mainMenuController = loader.getController();
+            mainMenuController.setTableView();
+            Stage stage = (Stage) FillError.getScene().getWindow();
+            stage.setTitle("MainMenu");
+            stage.setScene(new Scene(root));
         }
     }
 
@@ -91,5 +97,4 @@ public class LoginController {
         stage.setTitle("SignUp");
         stage.setScene(new Scene(root));
     }
-
 }

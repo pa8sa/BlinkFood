@@ -14,27 +14,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class BankController implements Initializable {
     private Restaurant selectedRestaurant;
-
     private double TotalCost;
-
-    @FXML
-    private Button BackButton;
 
     @FXML
     private Text Balance;
 
     @FXML
-    private ToggleGroup Bank;
-
-    @FXML
     private Text Cost;
-
-    @FXML
-    private Button DoneButton;
 
     @FXML
     private ToggleButton LimitedBank;
@@ -57,12 +48,12 @@ public class BankController implements Initializable {
     }
 
     @FXML
-    void Done(MouseEvent event) throws IOException {
+    void Done(MouseEvent event) throws IOException, SQLException {
         if (NormalBank.isSelected()) {
             Bank_Normal NBank = new Bank_Normal(TotalCost, Server.user.getBalance());
             if (NBank.Buy(NBank.getBalance(), NBank.getCost()) != -1) {
                 NBank.setBalance(NBank.Buy(NBank.getBalance(), NBank.getCost()));
-                Server.ClientHandler.EditUser(Server.user.getUserName(), NBank.getBalance());
+                Server.ClientHandler.editBalance(Server.user.getUserName(), NBank.getBalance());
                 DoneScene();
             }
         }
@@ -70,7 +61,7 @@ public class BankController implements Initializable {
             Bank_Limit LBank = new Bank_Limit(TotalCost, Server.user.getBalance());
             if (LBank.Buy(LBank.getBalance(), LBank.getCost()) != -1) {
                 LBank.setBalance(LBank.Buy(LBank.getBalance(), LBank.getCost()));
-                Server.ClientHandler.EditUser(Server.user.getUserName(), LBank.getBalance());
+                Server.ClientHandler.editBalance(Server.user.getUserName(), LBank.getBalance());
                 DoneScene();
             }
         }
@@ -78,7 +69,7 @@ public class BankController implements Initializable {
             Bank_Tax TBank = new Bank_Tax(TotalCost, Server.user.getBalance());
             if (TBank.Buy(TBank.getBalance(), TBank.getCost()) != -1) {
                 TBank.setBalance(TBank.Buy(TBank.getBalance(), TBank.getCost()));
-                Server.ClientHandler.EditUser(Server.user.getUserName(), TBank.getBalance());
+                Server.ClientHandler.editBalance(Server.user.getUserName(), TBank.getBalance());
                 DoneScene();
             }
         }

@@ -1,6 +1,8 @@
 package com.example.blinkfood;
 
 import java.io.*;
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +19,6 @@ public class SignUpController {
 
     @FXML
     private Button ButtonLogin;
-
-    @FXML
-    private Button ButtonOK;
 
     @FXML
     private RadioButton RadioButtonShowPass;
@@ -67,7 +66,7 @@ public class SignUpController {
     private Text FillError;
 
     @FXML
-    void NextScene(MouseEvent event) throws InterruptedException, IOException {
+    void NextScene(MouseEvent event) throws SQLException, IOException {
         if (RadioButtonShowPass.isSelected()) {
             TextPasswordField.setText(TextPassword.getText());
         }
@@ -86,39 +85,34 @@ public class SignUpController {
             FillError.setVisible(true);
             return;
         }
-        String Content = TextUsername.getText() + "," + TextPasswordField.getText() + "," + TextPhoneNumber.getText() + "," + TextAddress.getText() + "," + TextEmail.getText();
-        if (Server.ClientHandler.writeToFile("UserSignUp", Content) == 1) {
-            FillError.setVisible(false);
-            EmptyError.setVisible(false);
-            UsernameError.setVisible(false);
-            EmailError.setVisible(false);
-            PhoneNumberError.setVisible(false);
-            PasswordError.setVisible(false);
-            Stage stage = (Stage) ButtonOK.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            stage.setTitle("Menu");
-            stage.setScene(new Scene(root));
-        }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -1) {
-            EmptyError.setVisible(true);
-        }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -2) {
-            UsernameError.setVisible(true);
-        }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -3) {
-            EmailError.setVisible(true);
-        }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -4) {
-            PhoneNumberError.setVisible(true);
-        }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -5) {
+        String phrase = Server.ClientHandler.addUser(TextUsername.getText(), TextPhoneNumber.getText(), TextEmail.getText(), TextPassword.getText(),
+                TextAddress.getText());
+        if (phrase.equals("passWordLength")) {
             PasswordError.setVisible(true);
         }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -6) {
+        else if (phrase.equals("emailWrong")) {
+            EmailError.setVisible(true);
+        }
+        else if (phrase.equals("phoneNumberWrong")) {
+            PhoneNumberError.setVisible(true);
+        }
+        else if (phrase.equals("userNameTaken")) {
+            UsernameError.setVisible(true);
+        }
+        else if (phrase.equals("phoneNumberTaken")) {
             PhoneNumberTakenError.setVisible(true);
         }
-        else if (Server.ClientHandler.writeToFile("UserSignUp", Content) == -7) {
+        else if (phrase.equals("emailTaken")) {
             EmailTakenError.setVisible(true);
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+            Parent root = loader.load();
+            MainMenuController mainMenuController = loader.getController();
+            mainMenuController.setTableView();
+            Stage stage = (Stage) FillError.getScene().getWindow();
+            stage.setTitle("MainMenu");
+            stage.setScene(new Scene(root));
         }
     }
 

@@ -10,18 +10,18 @@ public class Restaurant {
     public enum Res_Type {BiroonBar, BaMiz};
     private Res_Type Type;
     private int Chair_Delivery_Count;
-    private int FoodsCount;
     private Boolean Enable;
     private String IMGpath;
+    private int Res_ID;
 
-    public Restaurant(String name, String address, String workTime, String type, int foodsCount, int Miz_Peyk, Boolean enable, String imgpath) {
+    public Restaurant(String name, String address, String workTime, String type, int Miz_Peyk, Boolean enable, String imgpath, int res_id) {
         Name = name;
         Address = address;
         WorkTime = workTime;
         Chair_Delivery_Count = Miz_Peyk;
-        FoodsCount = foodsCount;
         Enable = enable;
         IMGpath = imgpath;
+        Res_ID = res_id;
         if (type.equals("BiroonBar")) {
             Type = Res_Type.BiroonBar;
         }
@@ -35,6 +35,11 @@ public class Restaurant {
     public Boolean getEnable() {
         return Enable;
     }
+
+    public int getRes_ID() {
+        return Res_ID;
+    }
+
     public String getName() {
         return Name;
     }
@@ -53,10 +58,6 @@ public class Restaurant {
 
     public String getWorkTime() {
         return WorkTime;
-    }
-
-    public int getFoodsCount() {
-        return FoodsCount;
     }
 
     public ArrayList<Food> getFoods() {
@@ -91,12 +92,12 @@ public class Restaurant {
         Chair_Delivery_Count = Chair_Delivery;
     }
 
-    public void setFoodsCount(int foodsCount) {
-        FoodsCount = foodsCount;
-    }
-
     public void setEnable(Boolean enable) {
         Enable = enable;
+    }
+
+    public void setRes_ID(int res_ID) {
+        Res_ID = res_ID;
     }
 
     public void addFood (Food food) {

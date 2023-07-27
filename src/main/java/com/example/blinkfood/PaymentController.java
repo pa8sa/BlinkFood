@@ -19,15 +19,6 @@ public class PaymentController implements Initializable {
     private Restaurant selectedRestaurant;
 
     @FXML
-    private Button BackButton;
-
-    @FXML
-    private Button DoneButton;
-
-    @FXML
-    private Button ChargeButton;
-
-    @FXML
     private Text AddressText;
 
     @FXML
@@ -55,7 +46,7 @@ public class PaymentController implements Initializable {
     void Remove(MouseEvent event) {
         String selectedItem = ListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+            for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
                 String foodItem = selectedRestaurant.getFoods().get(i).getName() + "   x" + selectedRestaurant.getFoods().get(i).getCount();
                 if (selectedItem.equals(foodItem)) {
                     Food food = selectedRestaurant.getFoods().get(i);
@@ -116,7 +107,7 @@ public class PaymentController implements Initializable {
     }
 
     private void initializeListView() {
-        for (int i = 0; i < selectedRestaurant.getFoodsCount(); i++) {
+        for (int i = 0; i < selectedRestaurant.getFoods().size(); i++) {
             if (selectedRestaurant.getFoods().get(i).getCount() > 0) {
                 ListView.getItems().add(selectedRestaurant.getFoods().get(i).getName() + "   x" + selectedRestaurant.getFoods().get(i).getCount());
                 TotalCost += selectedRestaurant.getFoods().get(i).getCount() * selectedRestaurant.getFoods().get(i).getPrice();

@@ -4,24 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ChargeController {
     private Restaurant selectedRestaurant;
 
     @FXML
     private TextField AmountTextField;
-
-    @FXML
-    private Button BackButton;
-
-    @FXML
-    private Button DoneButton;
 
     @FXML
     private RadioButton PrivacyRadioButton;
@@ -38,10 +32,10 @@ public class ChargeController {
     }
 
     @FXML
-    void Done(MouseEvent event) throws IOException {
+    void Done(MouseEvent event) throws IOException, SQLException {
         if (PrivacyRadioButton.isSelected()) {
             Server.user.AddToBalance(Double.parseDouble(AmountTextField.getText()));
-            Server.ClientHandler.EditUser(Server.user.getUserName(), Server.user.getBalance());
+            Server.ClientHandler.editBalance(Server.user.getUserName(), Server.user.getBalance());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
             Parent root = loader.load();
             PaymentController paymentController = loader.getController();
