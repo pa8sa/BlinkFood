@@ -9,13 +9,10 @@ import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.nio.FloatBuffer;
+import java.sql.SQLException;
 
 public class AdminRestaurantController {
-
-    public static int sw = 0;
 
     @FXML
     private Text FillError;
@@ -95,12 +92,12 @@ public class AdminRestaurantController {
     }
 
     @FXML
-    void Remove(MouseEvent event) throws IOException {
-        Server.ClientHandler.RemoveRestaurant(selectedRestaurant.getName());
+    void Remove(MouseEvent event) throws IOException, SQLException {
+        Server.ClientHandler.removeRestaurant(selectedRestaurant.getName());
     }
 
     @FXML
-    void Submit(MouseEvent event) throws IOException {
+    void Submit(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
         NameError.setVisible(false);
         NumberError.setVisible(false);
@@ -109,23 +106,25 @@ public class AdminRestaurantController {
             FillError.setVisible(true);
         }
         else if (EnableButton.isSelected()) {
-            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == 1) {
-
-            }
-            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == -2) {
-                NameError.setVisible(true);
-            }
-            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), NameTextField.getText() + "," + AddressTextField.getText() +
-                    "," + WorkTimeTextField.getText() + "," + TypeTextField.getText() + "," + ChairDeliveryTextField.getText() + "," + ImgPathField.getText()) == -4) {
-                NumberError.setVisible(true);
+            Server.ClientHandler.setEnableDisable(selectedRestaurant.getName(), "true");
+            String phrase = Server.ClientHandler.editRestaurant(selectedRestaurant.getName(), NameTextField.getText(), AddressTextField.getText(),
+                    WorkTimeTextField.getText(), TypeTextField.getText(), ChairDeliveryTextField.getText(), ImgPathField.getText());
+            if (phrase.equals("typeWrong")) {
+                return;
+            } else if (phrase.equals("ChairDeliveryWrong")) {
+                return;
+            } else if (phrase.equals("imgPathWrong")) {
+                return;
+            } else if (phrase.equals("nameTaken")) {
+                return;
+            } else if (phrase.equals("addressTaken")) {
+                return;
+            } else if (phrase.equals("imgPathWrong")) {
+                return;
             }
         }
         else if (DisableButton.isSelected()) {
-            if (Server.ClientHandler.EditRestaurant(selectedRestaurant.getName(), "false") == 1 ) {
-
-            }
+            Server.ClientHandler.setEnableDisable(selectedRestaurant.getName(), "false");
         }
     }
 }

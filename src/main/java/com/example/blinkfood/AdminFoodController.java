@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -15,10 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.sql.SQLException;
 
 public class AdminFoodController {
 
@@ -75,15 +72,31 @@ public class AdminFoodController {
     private TableColumn<Food, Integer> WeightTimeColumn;
 
     @FXML
-    void Add(MouseEvent event) throws IOException {
+    void Add(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
         if (AddTypeField.getText().isEmpty() || AddWeightField.getText().isEmpty() || AddPriceField.getText().isEmpty() || AddNameField.getText().isEmpty() ||
         AddImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
         }
-        else if (Server.ClientHandler.EditFoods("Add", null, AddNameField.getText() + "," + AddPriceField.getText() + "," +
-                AddWeightField.getText() + "," + AddTypeField.getText() + "," + AddImgPath.getText(), selectedRestaurant) == 1) {
-
+        String phrase = Server.ClientHandler.addFood(AddNameField.getText(), AddPriceField.getText(), AddWeightField.getText(), AddTypeField.getText(),
+                AddImgPath.getText(), selectedRestaurant.getRes_ID());
+        if (phrase.equals("imgPathWrong")) {
+            return;
+        }
+        else if (phrase.equals("priceWrong")) {
+            return;
+        }
+        else if (phrase.equals("weightWrong")) {
+            return;
+        }
+        else if (phrase.equals("typeWrong")) {
+            return;
+        }
+        else if (phrase.equals("nameTaken")) {
+            return;
+        }
+        else if (phrase.equals("imgPathTaken")) {
+            return;
         }
     }
 
@@ -99,22 +112,38 @@ public class AdminFoodController {
     }
 
     @FXML
-    void Edit(MouseEvent event) throws IOException {
+    void Edit(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
         if (EditNameField.getText().isEmpty() || EditPriceField.getText().isEmpty() || EditWeightField.getText().isEmpty() || EditTypeField.getText().isEmpty() ||
         EditImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
         }
-        if (Server.ClientHandler.EditFoods("Edit", TableView.getSelectionModel().getSelectedItem().getName(), EditNameField.getText() + "," +
-                EditPriceField.getText() + "," + EditWeightField.getText() + "," + EditTypeField.getText() + "," + EditImgPath.getText(), null) == 1) {
-
+        String phrase = Server.ClientHandler.editFood(TableView.getSelectionModel().getSelectedItem().getName(), EditNameField.getText(), EditPriceField.getText(), EditWeightField.getText(), EditTypeField.getText(),
+                EditImgPath.getText(), selectedRestaurant.getRes_ID());
+        if (phrase.equals("imgPathWrong")) {
+            return;
+        }
+        else if (phrase.equals("priceWrong")) {
+            return;
+        }
+        else if (phrase.equals("weightWrong")) {
+            return;
+        }
+        else if (phrase.equals("typeWrong")) {
+            return;
+        }
+        else if (phrase.equals("nameTaken")) {
+            return;
+        }
+        else if (phrase.equals("imgPathTaken")) {
+            return;
         }
     }
 
     @FXML
-    void Remove(MouseEvent event) throws IOException {
+    void Remove(MouseEvent event) throws IOException, SQLException {
         if (!TableView.getSelectionModel().isEmpty()) {
-            Server.ClientHandler.EditFoods("Remove", TableView.getSelectionModel().getSelectedItem().getName(), selectedRestaurant.getName(), selectedRestaurant);
+            Server.ClientHandler.removeFood(TableView.getSelectionModel().getSelectedItem().getName());
             setTableView(TableView.getSelectionModel().getSelectedItem());
         }
     }

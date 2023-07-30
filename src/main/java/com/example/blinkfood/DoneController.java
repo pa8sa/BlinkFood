@@ -16,7 +16,7 @@ public class DoneController {
 
     @FXML
     void Back(MouseEvent event) throws IOException {
-        Server.ClientHandler.ResetRestaurants();
+        Server.ClientHandler.resetRestaurants();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) BackButton.getScene().getWindow();

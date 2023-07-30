@@ -76,10 +76,118 @@ public class Server {
             return "done";
         }
 
-        public static String addRestaurants (String name, String address, String workTime, String type, int chairDeliveryCount, Boolean enable, String imgPath) throws SQLException {
-            String sqlQuery = "INSERT INTO restaurants VALUES(" + Restaurants.size() + ", " + name + ", " + address + ", " + workTime + ", " + type + ", "
-                    + chairDeliveryCount + ", " + enable + ", " + imgPath + ");";
+        public static String addRestaurants (String name, String address, String workTime, String type, String chairDeliveryCount, String imgPath) throws SQLException {
+            if (!type.equals("BaMiz") || !type.equals("BiroonBar")) {
+                return "typeWrong";
+            }
+
+            if (!chairDeliveryCount.matches("\\d+")) {
+                return "chairDeliveryWrong";
+            }
+
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+                return "imgPathWrong";
+            }
+
+            String sqlQuery = "SELECT Name FROM restaurants WHERE Name = '" + name + "';";
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next()) {
+                return "nameTaken";
+            }
+
+            sqlQuery = "SELECT Name FROM restaurants WHERE Address = '" + address + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next()) {
+                return "addressTaken";
+            }
+
+            sqlQuery = "SELECT Name FROM restaurants WHERE IMGpath = '" + imgPath + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next()) {
+                return "imgPathTaken";
+            }
+
+            sqlQuery = "INSERT INTO restaurants VALUES(" + Restaurants.size() + ", " + name + ", " + address + ", " + workTime + ", " + type + ", "
+                    + chairDeliveryCount + ", " + "true" + ", " + imgPath + ");";
             statement.executeQuery(sqlQuery);
+            return "done";
+        }
+
+        public static String addFood (String name, String price, String weight, String type, String imgPath, int food_id) throws SQLException {
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+                return "imgPathWrong";
+            }
+
+            if (!price.matches("^[0-9.]+$")) {
+                return "priceWrong";
+            }
+
+            if (!weight.matches("^[0-9.]+$")) {
+                return "weightWrong";
+            }
+
+            if (!type.equals("Sonati") || !type.equals("FastFood")) {
+                return "typeWrong";
+            }
+
+            String sqlQuery = "SELECT Name FROM foods WHERE Name = '" + name + "';";
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next()) {
+                return "nameTaken";
+            }
+
+            sqlQuery = "SELECT Name FROM foods WHERE IMGpath = '" + imgPath + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next()) {
+                return "imgPathTaken";
+            }
+
+            sqlQuery = "INSERT INTO restaurants VALUES(" + food_id + ", " + name + ", " + price + ", " + weight + ", " + type + ", " + imgPath + ");";
+            statement.executeQuery(sqlQuery);
+            return "done";
+        }
+
+        public static void removeFood (String name) throws SQLException {
+            String sqlQuery = "DELETE FROM foods WHERE Name = '" + name + "';";
+            statement.executeQuery(sqlQuery);
+        }
+
+        public static String editFood (String oldName, String name, String price, String weight, String type, String imgPath, int food_id) throws SQLException {
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+                return "imgPathWrong";
+            }
+
+            if (!price.matches("^[0-9.]+$")) {
+                return "priceWrong";
+            }
+
+            if (!weight.matches("^[0-9.]+$")) {
+                return "weightWrong";
+            }
+
+            if (!type.equals("Sonati") || !type.equals("FastFood")) {
+                return "typeWrong";
+            }
+
+            String sqlQuery = "SELECT Name FROM foods WHERE Name = '" + name + "';";
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next() && !oldName.equals(name)) {
+                return "nameTaken";
+            }
+
+            String sqlQuery2 = "SELECT IMGpath FROM foods WHERE Name = '" + oldName + "';";
+            ResultSet resultSet2 = statement.executeQuery(sqlQuery2);
+            resultSet2.next();
+            sqlQuery = "SELECT Name FROM foods WHERE IMGpath = '" + imgPath + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next() && !resultSet2.getString("IMGpath").equals(imgPath)) {
+                return "imgPathTaken";
+            }
+
+            sqlQuery = "UPDATE foods SET Food_id = '" + food_id + "', Name = '" + name + "', Price = '" + price + "', Weight = '" + weight +
+            "', Food_Type = '" + type + "', IMGpath = '" + imgPath + "' WHERE Name = '" + oldName + "';";
+            statement.executeQuery(sqlQuery);
+            return "done";
         }
 
         public static String checkUsers (String userName, String passWord) throws SQLException {
@@ -120,12 +228,65 @@ public class Server {
             statement.executeQuery(sqlQuery);
         }
 
-        public static void ResetRestaurants () {
+        public static void resetRestaurants () {
             for (int i = 0; i < Restaurants.size(); i++) {
                 for (int j = 0; j < Restaurants.get(i).getFoods().size(); j++) {
                     Restaurants.get(i).getFoods().get(j).setCount(0);
                 }
             }
+        }
+
+        public static void removeRestaurant (String name) throws SQLException {
+            String sqlQuery = "DELETE FROM restaurants WHERE Name = '" + name + "';";
+            statement.executeQuery(sqlQuery);
+        }
+
+        public static String editRestaurant (String oldName, String name, String address, String workTime, String type, String chairDeliveryCount, String imgPath) throws SQLException {
+            if (!type.equals("BaMiz") || !type.equals("BiroonBar")) {
+                return "typeWrong";
+            }
+
+            if (!chairDeliveryCount.matches("\\d+")) {
+                return "chairDeliveryWrong";
+            }
+
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+                return "imgPathWrong";
+            }
+
+            String sqlQuery = "SELECT Name FROM restaurants WHERE Name = '" + name + "';";
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next() && !oldName.equals(name)) {
+                return "nameTaken";
+            }
+
+            String sqlQuery2 = "SELECT Address FROM restaurants WHERE Name = '" + oldName + "';";
+            ResultSet resultSet2 = statement.executeQuery(sqlQuery2);
+            resultSet2.next();
+            sqlQuery = "SELECT Name FROM restaurants WHERE Address = '" + address + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next() && !resultSet2.getString("Address").equals(address)) {
+                return "addressTaken";
+            }
+
+            sqlQuery2 = "SELECT IMGpath FROM restaurants WHERE Name = '" + oldName + "';";
+            resultSet2 = statement.executeQuery(sqlQuery2);
+            resultSet2.next();
+            sqlQuery = "SELECT Name FROM restaurants WHERE IMGpath = '" + imgPath + "';";
+            resultSet = statement.executeQuery(sqlQuery);
+            if (resultSet.next() && !resultSet2.getString("IMGpath").equals(imgPath)) {
+                return "imgPathTaken";
+            }
+
+            sqlQuery = "UPDATE restaurants SET Name = '" + name + "', Address = '" + address + "', Worktime = '" + workTime + "', Res_Type = '" + type +
+            "', Chair_Delivery_Count = '" + chairDeliveryCount + "', IMGpath = '" + imgPath + "' WHERE Name = '" + oldName + "';";
+            statement.executeQuery(sqlQuery);
+            return "done";
+        }
+
+        public static void setEnableDisable (String name, String value) throws SQLException {
+            String sqlQuery = "UPDATE restaurants SET Enable = '" + value + "' WHERE Name = '" + name + "';";
+            statement.executeQuery(sqlQuery);
         }
     }
 }

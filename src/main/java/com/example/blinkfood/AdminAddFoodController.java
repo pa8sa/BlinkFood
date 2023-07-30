@@ -9,11 +9,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AdminAddFoodController {
 
     private static int i = 0;
     private int FoodCount;
+    private int id;
 
     @FXML
     private Text FillError;
@@ -40,7 +42,7 @@ public class AdminAddFoodController {
     private TextField WeightTextField;
 
     @FXML
-    void Add(MouseEvent event) throws IOException {
+    void Add(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
         NameError.setVisible(false);
         NumberError.setVisible(false);
@@ -49,23 +51,28 @@ public class AdminAddFoodController {
             FillError.setVisible(true);
             return;
         }
-        else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == 1) {
+        String phrase = Server.ClientHandler.addFood(NameTextField.getText(), PriceTextField.getText(), WeightTextField.getText(), TypeTextField.getText(),
+                ImgPathField.getText(), id);
+        if (phrase.equals("imgPathWrong")) {
+            return;
+        }
+        else if (phrase.equals("priceWrong")) {
+            return;
+        }
+        else if (phrase.equals("weightWrong")) {
+            return;
+        }
+        else if (phrase.equals("typeWrong")) {
+            return;
+        }
+        else if (phrase.equals("nameTaken")) {
+            return;
+        }
+        else if (phrase.equals("imgPathTaken")) {
+            return;
+        }
+        else {
             i++;
-            NameTextField.clear();
-            PriceTextField.clear();
-            WeightTextField.clear();
-            TypeTextField.clear();
-        }
-        else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == -2) {
-            NameError.setVisible(true);
-            return;
-        }
-        else if (Server.ClientHandler.writeToFile("AddFood", NameTextField.getText() + "," + PriceTextField.getText() + "," +
-                WeightTextField.getText() + "," + TypeTextField.getText() + "," + ImgPathField.getText()) == -4) {
-            NumberError.setVisible(true);
-            return;
         }
         if (i == FoodCount) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
@@ -76,7 +83,8 @@ public class AdminAddFoodController {
         }
     }
 
-    public void setFoodCount (int FoodCount) {
+    public void setFoodCount (int FoodCount, int id) {
         this.FoodCount = FoodCount;
+        this.id = id;
     }
 }
