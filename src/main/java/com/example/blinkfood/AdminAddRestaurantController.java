@@ -55,6 +55,7 @@ public class AdminAddRestaurantController {
         String phrase = Server.ClientHandler.addRestaurants(NameTextField.getText(), AddressTextField.getText(), WorkTimeTextField.getText(),
                 TypeTextField.getText(), ChairDeliveryTextField.getText(), ImgPathField.getText());
         if (phrase.equals("typeWrong")) {
+
             return;
         }
         else if (phrase.equals("ChairDeliveryWrong")) {

@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -66,6 +65,7 @@ public class LoginController {
             stage.setScene(new Scene(root));
         }
         else {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
             Parent root = loader.load();
             MainMenuController mainMenuController = loader.getController();
