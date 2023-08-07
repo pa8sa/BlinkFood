@@ -49,6 +49,18 @@ public class AdminRestaurantController {
     @FXML
     private TextField WorkTimeTextField;
 
+    @FXML
+    private Text AddressTaken;
+
+    @FXML
+    private Text ImgPathError;
+
+    @FXML
+    private Text ImgPathTakenError;
+
+    @FXML
+    private Text TypeError;
+
     public void setRestaurant (Restaurant restaurant) {
         selectedRestaurant = restaurant;
         setFields();
@@ -72,9 +84,11 @@ public class AdminRestaurantController {
     }
 
     @FXML
-    void Back(MouseEvent event) throws IOException {
+    void Back(MouseEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
         Parent root = loader.load();
+        AdminController adminController = loader.getController();
+        adminController.setTableView();
         Stage stage = (Stage) DisableButton.getScene().getWindow();
         stage.setTitle("Admin Panel");
         stage.setScene(new Scene(root));
@@ -101,6 +115,12 @@ public class AdminRestaurantController {
         FillError.setVisible(false);
         NameError.setVisible(false);
         NumberError.setVisible(false);
+        TypeError.setVisible(false);
+        NumberError.setVisible(false);
+        ImgPathError.setVisible(false);
+        NameError.setVisible(false);
+        AddressTaken.setVisible(false);
+        ImgPathTakenError.setVisible(false);
         if (NameTextField.getText().isEmpty() || AddressTextField.getText().isEmpty() || WorkTimeTextField.getText().isEmpty() ||
         TypeTextField.getText().isEmpty() || ChairDeliveryTextField.getText().isEmpty() || ImgPathField.getText().isEmpty()) {
             FillError.setVisible(true);
@@ -110,17 +130,17 @@ public class AdminRestaurantController {
             String phrase = Server.ClientHandler.editRestaurant(selectedRestaurant.getName(), NameTextField.getText(), AddressTextField.getText(),
                     WorkTimeTextField.getText(), TypeTextField.getText(), ChairDeliveryTextField.getText(), ImgPathField.getText());
             if (phrase.equals("typeWrong")) {
-                return;
+                TypeError.setVisible(true);
             } else if (phrase.equals("ChairDeliveryWrong")) {
-                return;
+                NumberError.setVisible(true);
             } else if (phrase.equals("imgPathWrong")) {
-                return;
+                ImgPathError.setVisible(true);
             } else if (phrase.equals("nameTaken")) {
-                return;
+                NameError.setVisible(true);
             } else if (phrase.equals("addressTaken")) {
-                return;
+                AddressTaken.setVisible(true);
             } else if (phrase.equals("imgPathWrong")) {
-                return;
+                ImgPathTakenError.setVisible(true);
             }
         }
         else if (DisableButton.isSelected()) {

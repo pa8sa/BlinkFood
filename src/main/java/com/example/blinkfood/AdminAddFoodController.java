@@ -27,6 +27,15 @@ public class AdminAddFoodController {
     private Text NameError;
 
     @FXML
+    private Text ImgPathError;
+
+    @FXML
+    private Text ImgPathTakenError;
+
+    @FXML
+    private Text TypeError;
+
+    @FXML
     private Text NumberError;
 
     @FXML
@@ -46,6 +55,9 @@ public class AdminAddFoodController {
         FillError.setVisible(false);
         NameError.setVisible(false);
         NumberError.setVisible(false);
+        ImgPathError.setVisible(false);
+        TypeError.setVisible(false);
+        ImgPathTakenError.setVisible(false);
         if (NameTextField.getText().isEmpty() || PriceTextField.getText().isEmpty() || WeightTextField.getText().isEmpty() || TypeTextField.getText().isEmpty() ||
         ImgPathField.getText().isEmpty()) {
             FillError.setVisible(true);
@@ -54,21 +66,27 @@ public class AdminAddFoodController {
         String phrase = Server.ClientHandler.addFood(NameTextField.getText(), PriceTextField.getText(), WeightTextField.getText(), TypeTextField.getText(),
                 ImgPathField.getText(), id);
         if (phrase.equals("imgPathWrong")) {
+            ImgPathError.setVisible(true);
             return;
         }
         else if (phrase.equals("priceWrong")) {
+            NumberError.setVisible(true);
             return;
         }
         else if (phrase.equals("weightWrong")) {
+            NumberError.setVisible(true);
             return;
         }
         else if (phrase.equals("typeWrong")) {
+            TypeError.setVisible(true);
             return;
         }
         else if (phrase.equals("nameTaken")) {
+            NameError.setVisible(true);
             return;
         }
         else if (phrase.equals("imgPathTaken")) {
+            ImgPathTakenError.setVisible(true);
             return;
         }
         else {
@@ -77,6 +95,8 @@ public class AdminAddFoodController {
         if (i == FoodCount) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
             Parent root = loader.load();
+            AdminController adminController = loader.getController();
+            adminController.setTableView();
             Stage stage = (Stage) WeightTextField.getScene().getWindow();
             stage.setTitle("Admin Panel");
             stage.setScene(new Scene(root));

@@ -6,10 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
@@ -49,9 +49,11 @@ public class RestaurantController implements Initializable {
     }
 
     @FXML
-    void Back(MouseEvent event) throws IOException {
+    void Back(MouseEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setTableView();
         Stage stage = (Stage) ChoiceBox.getScene().getWindow();
         stage.setTitle("MainMenu");
         stage.setScene(new Scene(root));

@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -57,6 +56,21 @@ public class AdminFoodController {
     private Text FillError;
 
     @FXML
+    private Text ImgPathError;
+
+    @FXML
+    private Text ImgPathTakenError;
+
+    @FXML
+    private Text NameError;
+
+    @FXML
+    private Text NumberError;
+
+    @FXML
+    private Text TypeError;
+
+    @FXML
     private TableColumn<Food, String> NameColumn;
 
     @FXML
@@ -74,6 +88,11 @@ public class AdminFoodController {
     @FXML
     void Add(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
+        ImgPathError.setVisible(false);
+        NumberError.setVisible(false);
+        TypeError.setVisible(false);
+        NameError.setVisible(false);
+        ImgPathTakenError.setVisible(false);
         if (AddTypeField.getText().isEmpty() || AddWeightField.getText().isEmpty() || AddPriceField.getText().isEmpty() || AddNameField.getText().isEmpty() ||
         AddImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
@@ -81,22 +100,22 @@ public class AdminFoodController {
         String phrase = Server.ClientHandler.addFood(AddNameField.getText(), AddPriceField.getText(), AddWeightField.getText(), AddTypeField.getText(),
                 AddImgPath.getText(), selectedRestaurant.getRes_ID());
         if (phrase.equals("imgPathWrong")) {
-            return;
+            ImgPathError.setVisible(true);
         }
         else if (phrase.equals("priceWrong")) {
-            return;
+            NumberError.setVisible(true);
         }
         else if (phrase.equals("weightWrong")) {
-            return;
+            NumberError.setVisible(true);
         }
         else if (phrase.equals("typeWrong")) {
-            return;
+            TypeError.setVisible(true);
         }
         else if (phrase.equals("nameTaken")) {
-            return;
+            NameError.setVisible(true);
         }
         else if (phrase.equals("imgPathTaken")) {
-            return;
+            ImgPathTakenError.setVisible(true);
         }
     }
 
@@ -114,6 +133,11 @@ public class AdminFoodController {
     @FXML
     void Edit(MouseEvent event) throws IOException, SQLException {
         FillError.setVisible(false);
+        ImgPathError.setVisible(false);
+        NumberError.setVisible(false);
+        TypeError.setVisible(false);
+        NameError.setVisible(false);
+        ImgPathTakenError.setVisible(false);
         if (EditNameField.getText().isEmpty() || EditPriceField.getText().isEmpty() || EditWeightField.getText().isEmpty() || EditTypeField.getText().isEmpty() ||
         EditImgPath.getText().isEmpty()) {
             FillError.setVisible(true);
@@ -121,22 +145,22 @@ public class AdminFoodController {
         String phrase = Server.ClientHandler.editFood(TableView.getSelectionModel().getSelectedItem().getName(), EditNameField.getText(), EditPriceField.getText(), EditWeightField.getText(), EditTypeField.getText(),
                 EditImgPath.getText(), selectedRestaurant.getRes_ID());
         if (phrase.equals("imgPathWrong")) {
-            return;
+            ImgPathError.setVisible(true);
         }
         else if (phrase.equals("priceWrong")) {
-            return;
+            NumberError.setVisible(true);
         }
         else if (phrase.equals("weightWrong")) {
-            return;
+            NumberError.setVisible(true);
         }
         else if (phrase.equals("typeWrong")) {
-            return;
+            TypeError.setVisible(true);
         }
         else if (phrase.equals("nameTaken")) {
-            return;
+            NameError.setVisible(true);
         }
         else if (phrase.equals("imgPathTaken")) {
-            return;
+            ImgPathTakenError.setVisible(true);
         }
     }
 

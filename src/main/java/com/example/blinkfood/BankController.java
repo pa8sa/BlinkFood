@@ -53,6 +53,7 @@ public class BankController implements Initializable {
             Bank_Normal NBank = new Bank_Normal(TotalCost, Server.user.getBalance());
             if (NBank.Buy(NBank.getBalance(), NBank.getCost()) != -1) {
                 NBank.setBalance(NBank.Buy(NBank.getBalance(), NBank.getCost()));
+                Server.user.ReduceOfBalance(Server.user.getBalance() - NBank.getBalance());
                 Server.ClientHandler.editBalance(Server.user.getUserName(), NBank.getBalance());
                 DoneScene();
             }
@@ -61,6 +62,7 @@ public class BankController implements Initializable {
             Bank_Limit LBank = new Bank_Limit(TotalCost, Server.user.getBalance());
             if (LBank.Buy(LBank.getBalance(), LBank.getCost()) != -1) {
                 LBank.setBalance(LBank.Buy(LBank.getBalance(), LBank.getCost()));
+                Server.user.ReduceOfBalance(Server.user.getBalance() - LBank.getBalance());
                 Server.ClientHandler.editBalance(Server.user.getUserName(), LBank.getBalance());
                 DoneScene();
             }
@@ -69,6 +71,7 @@ public class BankController implements Initializable {
             Bank_Tax TBank = new Bank_Tax(TotalCost, Server.user.getBalance());
             if (TBank.Buy(TBank.getBalance(), TBank.getCost()) != -1) {
                 TBank.setBalance(TBank.Buy(TBank.getBalance(), TBank.getCost()));
+                Server.user.ReduceOfBalance(Server.user.getBalance() - TBank.getBalance());
                 Server.ClientHandler.editBalance(Server.user.getUserName(), TBank.getBalance());
                 DoneScene();
             }

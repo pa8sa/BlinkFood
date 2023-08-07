@@ -2,7 +2,6 @@ package com.example.blinkfood;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -10,10 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class PaymentController implements Initializable {
+public class PaymentController {
     private int TotalCost;
     private Restaurant selectedRestaurant;
 
@@ -103,6 +100,7 @@ public class PaymentController implements Initializable {
     public void setRestaurant(Restaurant restaurant) {
         selectedRestaurant = restaurant;
         initializeListView();
+        setFields();
     }
 
     private void initializeListView() {
@@ -116,8 +114,7 @@ public class PaymentController implements Initializable {
         RestaurantText.setText(selectedRestaurant.getName());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void setFields() {
         UsernameText.setText(Server.user.getUserName());
         PhoneNumberText.setText(Server.user.getPhoneNumber());
         AddressText.setText(Server.user.getAddress());

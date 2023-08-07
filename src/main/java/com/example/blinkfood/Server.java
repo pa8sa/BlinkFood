@@ -1,5 +1,6 @@
 package com.example.blinkfood;
 
+import javax.xml.xpath.XPathEvaluationResult;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -108,7 +109,7 @@ public class Server {
                 return "chairDeliveryWrong";
             }
 
-            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5 || imgPath.startsWith("\"") || imgPath.endsWith("\"")) {
                 return "imgPathWrong";
             }
 
@@ -156,7 +157,7 @@ public class Server {
         }
 
         public static String addFood (String name, String price, String weight, String type, String imgPath, int food_id) throws SQLException {
-            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5 || imgPath.startsWith("\"") || imgPath.endsWith("\"")) {
                 return "imgPathWrong";
             }
 
@@ -208,7 +209,7 @@ public class Server {
         }
 
         public static String editFood (String oldName, String name, String price, String weight, String type, String imgPath, int food_id) throws SQLException {
-            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5) {
+            if (!imgPath.endsWith(".jpg") || imgPath.length() < 5 || imgPath.endsWith("\"") || imgPath.startsWith("\"")) {
                 return "imgPathWrong";
             }
 
@@ -253,6 +254,7 @@ public class Server {
             preparedStatement.setDouble(4, Double.parseDouble(weight));
             preparedStatement.setString(5, type);
             preparedStatement.setString(6, imgPath.replace("\\", "/"));
+            preparedStatement.setString(7, oldName);
             preparedStatement.executeUpdate();
             return "done";
         }
@@ -303,7 +305,7 @@ public class Server {
             preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setDouble(1, newBalance);
             preparedStatement.setString(2, userName);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         }
 
         public static void resetRestaurants () {

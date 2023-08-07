@@ -37,5 +37,30 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Text fx:id="ImgPathError" fill="#ff1b00" layoutX="321.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Path Is Wrong" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="NumberError" fill="#ff1b00" layoutX="277.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price And Weight Must Be Number" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="TypeError" fill="#ff1b00" layoutX="338.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Is Wrong" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="NameError" fill="#ff1b00" layoutX="325.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Name Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="ImgPathTakenError" fill="#ff1b00" layoutX="306.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Image Path Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

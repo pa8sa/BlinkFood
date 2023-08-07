@@ -66,5 +66,25 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Text fx:id="TypeError" fill="#ff2000" layoutX="337.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Is Wrong" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="ImgError1" fill="#ff2000" layoutX="317.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Path Is Wrong" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="AddressError" fill="#ff2000" layoutX="318.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Address Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="ImgTakenError" fill="#ff2000" layoutX="305.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Image Path Is Taken" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

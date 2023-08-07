@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class DoneController {
 
@@ -15,10 +16,12 @@ public class DoneController {
     private Button BackButton;
 
     @FXML
-    void Back(MouseEvent event) throws IOException {
+    void Back(MouseEvent event) throws IOException, SQLException {
         Server.ClientHandler.resetRestaurants();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setTableView();
         Stage stage = (Stage) BackButton.getScene().getWindow();
         stage.setTitle("MainMenu");
         stage.setScene(new Scene(root));

@@ -33,7 +33,7 @@ public class ChargeController {
 
     @FXML
     void Done(MouseEvent event) throws IOException, SQLException {
-        if (PrivacyRadioButton.isSelected()) {
+        if (PrivacyRadioButton.isSelected() && AmountTextField.getText().matches("^[0-9]+(?:\\.[0-9]+)?$")) {
             Server.user.AddToBalance(Double.parseDouble(AmountTextField.getText()));
             Server.ClientHandler.editBalance(Server.user.getUserName(), Server.user.getBalance());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
